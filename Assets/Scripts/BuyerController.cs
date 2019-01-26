@@ -7,9 +7,6 @@ public class BuyerController : MonoBehaviour, IFearable
 {
     [SerializeField] private float _fearLevelCurrent = 0;
 
-    [SerializeField]
-    private ProgressBarPro _fearBar;
-
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
@@ -55,7 +52,6 @@ public class BuyerController : MonoBehaviour, IFearable
         { 
             yield return new WaitForSeconds(_fearDecrementInterval);
             _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
-            _fearBar.SetValue(_fearLevelCurrent, _fearLevelMax);
             DoFearChecks();
         }
     }
