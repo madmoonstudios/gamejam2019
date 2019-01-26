@@ -17,6 +17,16 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private ProgressBarPro _fearBar;
 
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
+
+    internal void TryDestroy()
+    {
+        if (_moveTargetType == MoveTargetType.FLEE)
+        {
+            GameManager._instance.AddToScore();
+            Destroy(this.gameObject);
+        }
+    }
+
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
     private float _fearDecrementAmount = 5;             // Standard fear lost over time.
@@ -33,12 +43,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {        
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
+        RegisterCallback();
         _fearBar = GetComponentInChildren<ProgressBarPro>();
     }
 
     public void Start()
     {
-        RegisterCallback();
         
         // Intialize array of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
@@ -73,6 +83,17 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     internal float GetSpookLevel()
     {
         return _fearLevelCurrent / _fearLevelMax;
+    }
+
+    internal bool TryEndGame()
+    {
+        if (_moveTargetType == MoveTargetType.REALTOR)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            return true;
+        }
+
+        return false;
     }
 
     private void MoveToRealtor()
@@ -140,10 +161,10 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 MoveToUnvisitedRoom();
                 break;
             case MoveTargetType.REALTOR:
-                Debug.Log("Realtor reached; game is lost.");
+                TryEndGame();
                 break;
             case MoveTargetType.FLEE:
-                Debug.Log("Front door reached; increase score!");
+                TryDestroy();
                 break;
         }
     }

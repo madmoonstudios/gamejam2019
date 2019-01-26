@@ -42,9 +42,9 @@ public class MonologueGenerator : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
-            float spookLevel = _controller.GetSpookLevel() + Random.Range(-.2f, .2f);
+            float spookLevel = Mathf.Max(0, _controller.GetSpookLevel() + Random.Range(-.2f, .2f));
 
-            string phrase = _spookyPhrasesInput.FindLast((spookPhrase) => spookPhrase.spookLevel < spookLevel).phrase;
+            string phrase = _spookyPhrasesInput.FindLast((spookPhrase) => spookPhrase.spookLevel <= spookLevel).phrase;
 
             foreach (string word in phrase.Split(' '))
             {

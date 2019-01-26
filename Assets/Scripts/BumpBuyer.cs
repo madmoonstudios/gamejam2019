@@ -9,7 +9,7 @@ public class BumpBuyer : MonoBehaviour
     private BuyerController _controller;
     [SerializeField]
     private Rigidbody _rigidbody;
-    private const float c_bounceForce = 100.0f;
+    private const float c_bounceForce = 10.0f;
 
     private void OnCollisionStay(Collision collision)
     {

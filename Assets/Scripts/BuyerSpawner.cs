@@ -4,8 +4,7 @@ using UnityEngine.AI;
 
 public class BuyerSpawner : MonoBehaviour
 {
-    [SerializeField]
-    public int buyerNumber = 4;
+    public int buyerNumber = int.MaxValue;
 
     [SerializeField]
     private int _buyersRemaining;
@@ -47,13 +46,14 @@ public class BuyerSpawner : MonoBehaviour
                     Mathf.Infinity,
                     layerMask
             );
-            var navMeshComponent = this._buyerPrefab.GetComponent<NavMeshAgent>();
-            GameObject.Instantiate(
+            NavMeshAgent agent = GameObject.Instantiate(
                 _buyerPrefab,
-                 hit.point + new Vector3(0, navMeshComponent.height/2, 0),
+                 hit.point,
                  Quaternion.identity,
                  null
-            );
+            ).GetComponent<NavMeshAgent>();
+
+            agent.transform.position += new Vector3(0, agent.height / 2, 0);
             this._buyersRemaining--;
 
         }
