@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class BumpBuyer : MonoBehaviour
 {
-    [SerializeField]
     private BuyerController _controller;
-    [SerializeField]
     private Rigidbody _rigidbody;
-    private const float c_bounceForce = 100.0f;
+    private NPCMovement _npcMovement;
+    private const float c_bounceForce = 10.0f;
+    
+    private void Awake()
+    {
+        _controller = GetComponent<BuyerController>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _npcMovement = GetComponent<NPCMovement>();
+        _rigidbody.mass = 10.0f;
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -25,6 +32,7 @@ public class BumpBuyer : MonoBehaviour
     {
         Vector3 bounceVector = this.transform.position - bumpBuyer.transform.position;
         _rigidbody.AddForce(bounceVector * c_bounceForce);
+        _npcMovement.SetAgentVelocity(_rigidbody.velocity);
         if (bumpBuyer.IsScared())
         {
             _controller.Scare();
