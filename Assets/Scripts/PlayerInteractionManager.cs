@@ -16,6 +16,9 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField]
     private ProgressBarPro _vaseRechargeProgress;
 
+    [SerializeField]
+    private ProgressBarPro _lightRechargeProgress;
+
     private const float c_pentagramMaxTime = 10.0f;
     private const float c_vaseMaxTime = 10.0f;
 
@@ -24,6 +27,10 @@ public class PlayerInteractionManager : MonoBehaviour
     private bool _clickProcessed = false;
 
     private float _vaseRemainingTime = 0.0f;
+
+    private float _lightRemainingTime = 0.0f;
+
+    private const float c_lightMaxTime = 10.0f;
 
     private float _currentFear;
 
@@ -41,6 +48,9 @@ public class PlayerInteractionManager : MonoBehaviour
 
         _vaseRechargeProgress.SetValue(_vaseRemainingTime / c_vaseMaxTime);
         _vaseRemainingTime -= Time.deltaTime;
+
+        _lightRechargeProgress.SetValue(_lightRemainingTime / c_lightMaxTime);
+        _lightRemainingTime -= Time.deltaTime;
     }
 
     private void LateUpdate()
@@ -48,7 +58,7 @@ public class PlayerInteractionManager : MonoBehaviour
         _clickProcessed = false;
     }
 
-    public bool TryBreakVase(Vase vase)
+    internal bool TryBreakVase(IClickable vase)
     {
         if (_clickProcessed)
         {
@@ -60,7 +70,26 @@ public class PlayerInteractionManager : MonoBehaviour
             return false;
         }
 
-        vase.Break();
+        _vaseRemainingTime = c_vaseMaxTime;
+        vase.Interact();
+        _clickProcessed = true;
+        return true;
+    }
+
+    internal bool TrySwitchLight(IClickable light)
+    {
+        if (_clickProcessed)
+        {
+            return false;
+        }
+
+        if (_lightRemainingTime > 0)
+        {
+            return false;
+        }
+
+        _lightRemainingTime = c_lightMaxTime;
+        light.Interact();
         _clickProcessed = true;
         return true;
     }
