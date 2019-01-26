@@ -1,23 +1,34 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-[InitializeOnLoad]
 public class BuyerSpawner : MonoBehaviour
 {
-    // Use this for initialization
-    static void Start()
+    [SerializeField]
+    public int buyerNumber = 4;
+
+    [SerializeField]
+    private int _buyersRemaining;
+
+    [SerializeField]
+    private GameObject _buyerPrefab;
+
+    [SerializeField]
+    private float _waitTime;
+    // Start is called before the first frame update
+    void Start()
     {
-        print("Startup");
-        GameObject myRoadInstance =
-            Instantiate(Resources.Load("Buyer"),
-            new Vector3(5, 5, 5),
-            Quaternion.identity) as GameObject;
+        this._buyersRemaining = this.buyerNumber;
+        StartCoroutine(Spawn());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Spawn()
     {
+        while (this._buyersRemaining > 0)
+        {
+            yield return new WaitForSeconds(_waitTime);
+            GameObject.Instantiate(_buyerPrefab, this.transform.position, Quaternion.identity, null);
+            this._buyersRemaining--;
 
+        }
     }
 }
