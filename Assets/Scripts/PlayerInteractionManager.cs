@@ -77,9 +77,9 @@ public class PlayerInteractionManager : MonoBehaviour
             return false;
         }
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
 
-        Vector3 adjustedWorldPos = new Vector3(worldPos.x, worldPos.y, 0);
+        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 3.66f, worldPos.z);
 
         Instantiate(_pentagram, adjustedWorldPos, Quaternion.identity);
         _pentagramRemainingTime = c_pentagramMaxTime;

@@ -35,11 +35,11 @@ public class Pentagram : MonoBehaviour
             _countdownText.text = timeLeft.ToString();
 
             yield return new WaitForSeconds(0.9f);
-            RaycastHit2D [] hits = Physics2D.CircleCastAll(this.transform.position, _fearRadius, Vector2.zero);
+            RaycastHit [] hits = Physics.SphereCastAll(this.transform.position, _fearRadius, Vector3.one);
 
-            foreach (RaycastHit2D hit in hits)
+            foreach (RaycastHit hit in hits)
             {
-                IFearable fearable = hit.transform.GetComponent<IFearable>();
+                IFearable fearable = hit.transform.GetComponentInChildren<IFearable>();
                 if (fearable != null)
                 {
                     fearable.Scare();
