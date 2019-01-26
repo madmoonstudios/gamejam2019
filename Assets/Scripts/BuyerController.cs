@@ -33,6 +33,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {        
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
+        _fearBar = GetComponentInChildren<ProgressBarPro>();
     }
 
     public void Start()
