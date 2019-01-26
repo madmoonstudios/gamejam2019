@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BuyerSpawner : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class BuyerSpawner : MonoBehaviour
             yield return new WaitForSeconds(_waitTime);
 
             int layerMask = 1 << 8;
+            // Everything but layer 8, floor should be in something OTHER than layer 8!
             layerMask = ~layerMask;
             RaycastHit hit;
             Physics.Raycast(
@@ -45,8 +47,13 @@ public class BuyerSpawner : MonoBehaviour
                     Mathf.Infinity,
                     layerMask
             );
-            Debug.Log(hit.point);
-            GameObject.Instantiate(_buyerPrefab, this.transform.position, Quaternion.identity, null);
+            var navMeshComponent = this._buyerPrefab.GetComponent<NavMeshAgent>();
+            GameObject.Instantiate(
+                _buyerPrefab,
+                 hit.point + new Vector3(0, navMeshComponent.height/2, 0),
+                 Quaternion.identity,
+                 null
+            );
             this._buyersRemaining--;
 
         }
