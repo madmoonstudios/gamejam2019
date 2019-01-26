@@ -13,6 +13,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private float _fearLevelCurrent = 0;
 
+    [SerializeField]
+    private ProgressBarPro _fearBar;
+
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
@@ -61,6 +64,11 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         }
     }
 
+    internal bool IsScared()
+    {
+        return _fearLevelCurrent > _fearLevelMax / 2.0f;
+    }
+
     private void MoveToRealtor()
     {
         _moveTargetType = MoveTargetType.REALTOR;
@@ -77,6 +85,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare()
     {
+        Debug.Log("I am scared");
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
     }
@@ -91,6 +100,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         { 
             yield return new WaitForSeconds(_fearDecrementInterval);
             _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
+            _fearBar.SetValue(_fearLevelCurrent, _fearLevelMax);
             DoFearChecks();
         }
     }

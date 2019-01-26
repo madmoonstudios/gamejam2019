@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnVisitors : MonoBehaviour
+public class BuyerSpawner : MonoBehaviour
 {
     [SerializeField]
     public int buyerNumber = 4;
@@ -11,7 +10,7 @@ public class SpawnVisitors : MonoBehaviour
     private int _buyersRemaining;
 
     [SerializeField]
-    private GameObject _visitor;
+    private GameObject _buyerPrefab;
 
     [SerializeField]
     private float _waitTime;
@@ -27,14 +26,9 @@ public class SpawnVisitors : MonoBehaviour
         while (this._buyersRemaining > 0)
         {
             yield return new WaitForSeconds(_waitTime);
-            GameObject.Instantiate(_visitor, this.transform.position, Quaternion.identity, null);
+            GameObject.Instantiate(_buyerPrefab, this.transform.position, Quaternion.identity, null);
             this._buyersRemaining--;
 
         }
-        //for (int i = 0; i < this.buyerNumber; i++)
-        //{
-        //    yield return new WaitForSeconds(_waitTime); 
-        //    GameObject.Instantiate(_visitor, this.transform.position, Quaternion.identity, null);
-        //}
     }
 }
