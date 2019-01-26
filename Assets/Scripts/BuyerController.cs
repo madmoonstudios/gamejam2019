@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class BuyerController : MonoBehaviour, IFearable
 {
-    private float _scareLevelCurrent = 0;
-    private float _scareLevelMax = 100;
+    [SerializeField] private float _fearLevelCurrent = 0;
+
+    private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
+    private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
+    private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
+    private float _fearDecrementAmount = 5;             // Standard fear lost over time.
     private NPCMovement _npcMovement;
 
     void Awake()
     {
+        _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
     }
 
     public void Start()
     {
-        _npcMovement.SetMoveTarget(new Vector3(0, 0, 0));
+        MoveToRealtor();
+        StartCoroutine(DecrementFear());
     }
 
     private void MoveToRealtor()
@@ -26,17 +32,44 @@ public class BuyerController : MonoBehaviour, IFearable
 
     private void FleeHouse()
     {
-        // TODO(samkern): Implement
+        _npcMovement.SetMoveTarget(FrontDoor.frontDoorTransform);
     }
 
-    private void DepartHouse()
-    {
-        // TODO(samkern): Implement
-    }
-
-    // Override from IFearable
+    // IFearable
     public void Scare()
     {
-        
+        _fearLevelCurrent += _fearIncrementAmount;
+        DoFearChecks();
+    }
+
+    private float _fearDecrementInterval = 2.0f;
+    /// <summary>
+    /// Coroutine that periodically decrements the fear level of the NPC.
+    /// </summary>
+    private IEnumerator DecrementFear()
+    {
+        while (true)
+        { 
+            yield return new WaitForSeconds(_fearDecrementInterval);
+            _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
+            DoFearChecks();
+        }
+    }
+
+    private void DoFearChecks()
+    {
+        if (_fearLevelCurrent >= _fearLevelMax)
+        {
+            FleeHouse();         // OMG leave, dis too scary
+        }
+        else if (_fearLevelCurrent <= 0)
+        {
+            MoveToRealtor();     // Go buy the house!
+        }
+    }
+    
+    public void OnDestroy()
+    {
+        StopCoroutine(DecrementFear());
     }
 }

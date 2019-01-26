@@ -77,4 +77,9 @@ public class NPCMovement : MonoBehaviour
             yield return new WaitForSeconds(_destinationUpdateInterval);
         }
     }
+
+    public void OnDestroy()
+    {
+        StopCoroutine(UpdateDestination());
+    }
 }
