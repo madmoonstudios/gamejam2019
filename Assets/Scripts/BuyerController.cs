@@ -24,6 +24,7 @@ public class BuyerController : MonoBehaviour, IFearable
 
     public void Start()
     {
+        Debug.Log("Buyer");
         MoveToRealtor();
         StartCoroutine(DecrementFear());
     }
