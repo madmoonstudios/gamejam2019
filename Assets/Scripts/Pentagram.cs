@@ -26,6 +26,9 @@ public class Pentagram : MonoBehaviour
 
     private IEnumerator ScareThenDissapear()
     {
+        _countdownText.text = "-";
+        yield return new WaitForSeconds(2.0f);
+
         for (int timeLeft = _maxTimeSeconds; timeLeft > 0; timeLeft--)
         {
             _collisionMesh.enabled = false;
