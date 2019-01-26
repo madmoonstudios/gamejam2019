@@ -4,12 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public interface INPCMovementCallback
+{
+    /// <summary>
+    /// Remember to call this from Start!
+    /// </summary>
+    void RegisterCallback();
+    void TargetReached();
+}
+
 public class NPCMovement : MonoBehaviour
 {    
     private NavMeshAgent _agent;
-    private Transform _moveTarget;
+    [SerializeField] private Transform _moveTarget;
     private float _moveSpeedCurrent;
     private float _moveSpeedNormal = 5f;
+    private float _navAgentHeight;
+
+    private INPCMovementCallback _movementCallback;
 
     void Awake()
     {
@@ -17,6 +29,9 @@ public class NPCMovement : MonoBehaviour
         _moveSpeedCurrent = _moveSpeedNormal;
         _agent.speed = _moveSpeedCurrent;
         _agent.isStopped = true;
+        _agent.stoppingDistance = 2.0f;
+
+        _navAgentHeight = transform.position.y;
     }
 
     /// <summary>
@@ -31,7 +46,7 @@ public class NPCMovement : MonoBehaviour
         _moveTarget = t;
 
         _agent.isStopped = false;
-        _agent.destination = _moveTarget.position;
+        _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
         StopCoroutine(UpdateDestination());
     }
 
@@ -53,6 +68,7 @@ public class NPCMovement : MonoBehaviour
     /// </summary>
     public void StopMoving()
     {
+        Debug.Log("Stop Moving");
         _agent.isStopped = true;
     }
 
@@ -73,13 +89,40 @@ public class NPCMovement : MonoBehaviour
     {
         while (true)
         {
-            _agent.destination = _moveTarget.position;
+            _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
             yield return new WaitForSeconds(_destinationUpdateInterval);
         }
     }
-
+    
     public void OnDestroy()
     {
         StopCoroutine(UpdateDestination());
+    }
+    
+    // MOVEMENT CALLBACK
+
+    public void Update()
+    {
+        if (_agent.isStopped || _agent.pathPending) return;
+        
+        // Check if we've reached the destination
+        if (_agent.remainingDistance <= _agent.stoppingDistance)
+        {
+            if (_agent.hasPath || _agent.velocity.sqrMagnitude <= .1f)
+            {
+                HasReachedTarget();
+            }
+        }
+    }
+
+    private void HasReachedTarget()
+    {
+        _agent.isStopped = true;
+        _movementCallback.TargetReached();
+    }
+
+    public void SetNPCMovementCallback(INPCMovementCallback moveCallback)
+    {
+        _movementCallback = moveCallback;
     }
 }
