@@ -423,6 +423,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
+--- !u!114 &4887048581579379498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4887048581579379498, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7188351392912343191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7188351392912343191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -489,6 +501,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874013904916103845, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+        type: 3}
+      propertyPath: _countdownText
+      value: 
+      objectReference: {fileID: 4887048581579379498}
+    - target: {fileID: 2874013904916103845, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+        type: 3}
+      propertyPath: _maxTimeSeconds
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080155113521753620, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887048581579379498, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887048581579379498, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb1ee0b0c27f5c4f90e60b079c4eed0, type: 3}
