@@ -34,6 +34,11 @@ public class BuyerController : MonoBehaviour, IFearable
         return _fearLevelCurrent > _fearLevelMax / 2.0f;
     }
 
+    internal float GetSpookLevel()
+    {
+        return _fearLevelCurrent / _fearLevelMax;
+    }
+
     private void MoveToRealtor()
     {
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);

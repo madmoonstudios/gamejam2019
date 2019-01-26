@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2583122799501671200}
   - component: {fileID: 2583122799501671202}
   - component: {fileID: 8029703181106907603}
+  - component: {fileID: 1338057328939158857}
   m_Layer: 0
   m_Name: Buyer
   m_TagString: Untagged
@@ -177,6 +178,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 2583122799501671203}
   _rigidbody: {fileID: 2583122799501671202}
+--- !u!114 &1338057328939158857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583122799501671226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d258f5deb2e79164eb367d53f5939201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spookyPhrasesInput:
+  - phrase: Gosh darn! I sure am spooked.
+    spookLevel: 0
+  - phrase: Gosh darn! I sure am not spooked.
+    spookLevel: 60
+  _controller: {fileID: 2583122799501671203}
+  _spookyWord: {fileID: 2905323427494227359, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
+    type: 3}
 --- !u!1 &2583122800074681631
 GameObject:
   m_ObjectHideFlags: 0
