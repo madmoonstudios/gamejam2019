@@ -28,6 +28,11 @@ public class BuyerController : MonoBehaviour, IFearable
         StartCoroutine(DecrementFear());
     }
 
+    internal bool IsScared()
+    {
+        return _fearLevelCurrent > _fearLevelMax / 2.0f;
+    }
+
     private void MoveToRealtor()
     {
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
