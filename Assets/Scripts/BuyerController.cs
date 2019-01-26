@@ -43,11 +43,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {        
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
+        RegisterCallback();
+        _fearBar = GetComponentInChildren<ProgressBarPro>();
     }
 
     public void Start()
     {
-        RegisterCallback();
         
         // Intialize array of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6358183417341325068}
   - component: {fileID: 8632421168389733790}
   - component: {fileID: 6025020068462591588}
-  - component: {fileID: 160457335064543372}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -78,19 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &160457335064543372
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4640421065276642985}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8971290484463610780
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8971290484463610782}
   - component: {fileID: 8971290484463610781}
+  - component: {fileID: 3839833865476970932}
   m_Layer: 0
   m_Name: FrontDoor
   m_TagString: Untagged
@@ -135,3 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3866ad7fffd6a42c389c5fe873a24f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3839833865476970932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971290484463610780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f01692a77524124b18d4b797696a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buyerNumber: 4
+  _buyersRemaining: 0
+  _buyerPrefab: {fileID: 2583122799501671226, guid: 2ffd77ce7d4ee4fe7990dbbb3273314f,
+    type: 3}
+  _waitTime: 1
+  _raycastStartY: 80
