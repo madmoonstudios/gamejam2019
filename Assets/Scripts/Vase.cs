@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Vase : MonoBehaviour
+public class Vase : MonoBehaviour, IClickable
 {
-    internal void Break()
+    void IClickable.Interact()
     {
         Destroy(this.gameObject);
     }
