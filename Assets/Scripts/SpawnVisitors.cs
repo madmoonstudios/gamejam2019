@@ -5,6 +5,12 @@ using UnityEngine;
 public class SpawnVisitors : MonoBehaviour
 {
     [SerializeField]
+    public int buyerNumber = 4;
+
+    [SerializeField]
+    private int _buyersRemaining;
+
+    [SerializeField]
     private GameObject _visitor;
 
     [SerializeField]
@@ -12,15 +18,23 @@ public class SpawnVisitors : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this._buyersRemaining = this.buyerNumber;
         StartCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()
     {
-        while (true)
+        while (this._buyersRemaining > 0)
         {
             yield return new WaitForSeconds(_waitTime);
             GameObject.Instantiate(_visitor, this.transform.position, Quaternion.identity, null);
+            this._buyersRemaining--;
+
         }
+        //for (int i = 0; i < this.buyerNumber; i++)
+        //{
+        //    yield return new WaitForSeconds(_waitTime); 
+        //    GameObject.Instantiate(_visitor, this.transform.position, Quaternion.identity, null);
+        //}
     }
 }
