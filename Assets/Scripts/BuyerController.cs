@@ -122,6 +122,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare(float scareAmount)
     {
+        this.gameObject.GetComponent<AudioSource>().Play();
         _moodIndicator.GhostIndicator();
         _fearLevelCurrent += _fearIncrementRatio * scareAmount;
         DoFearChecks();

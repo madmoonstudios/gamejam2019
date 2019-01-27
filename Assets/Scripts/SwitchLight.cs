@@ -30,6 +30,7 @@ public class SwitchLight : FearInducer, IClickable
 
     void IClickable.Interact()
     {
+        this.gameObject.GetComponent<AudioSource>().Play();
         StartCoroutine(FlickerLights());
     }
 
