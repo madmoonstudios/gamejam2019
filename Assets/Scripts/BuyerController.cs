@@ -90,6 +90,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
+        _animator.DoFearFlicker();
     }
     
     internal bool IsScared()
@@ -103,6 +104,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     }
 
     private float _fearDecrementInterval = 5.0f;
+
+    [SerializeField]
+    private SpriteAnimator _animator;
 
     /// <summary>
     /// Coroutine that periodically decrements the fear level of the NPC.
