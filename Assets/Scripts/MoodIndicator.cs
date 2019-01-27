@@ -21,6 +21,7 @@ public class MoodIndicator : MonoBehaviour
 
     void Awake()
     {
+        Palette.Init();
         _startScale = transform.localScale;
         _indicatorAnimator = GetComponent<IndicatorAnimator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,7 +44,7 @@ public class MoodIndicator : MonoBehaviour
             _spriteRenderer.sprite = happy;
             AllTheImportantThings(typeValue);
             _indicatorAnimator.AnimateToSize(Vector2.zero, _startScale * .8f, .4f, RepeatMode.Once);
-            _indicatorAnimator.AnimateToColor(Color.white, Color.green, 1.5f, RepeatMode.PingPong);
+            _indicatorAnimator.AnimateToColor(Color.white, Palette.green, 1.5f, RepeatMode.PingPong);
             Invoke("ShrinkIndicator", _indicatorShowTime);
         }
     }
@@ -90,18 +91,18 @@ public class MoodIndicator : MonoBehaviour
             _spriteRenderer.sprite = scared;
             AllTheImportantThings(typeValue);
             _indicatorAnimator.AnimateToSize(_startScale * .8f, _startScale, .3f, RepeatMode.PingPong);
-            _indicatorAnimator.AnimateToColor(Color.yellow, Color.red, .3f, RepeatMode.PingPong);
+            _indicatorAnimator.AnimateToColor(Palette.yellow, Palette.red, .3f, RepeatMode.PingPong);
         }
     }
 
     public void PurchaseHouseIndicator()
     {
-        Debug.Log("Purchase house");
         int typeValue = (int) IndicatorType.PURCHASE_HOUSE;
+        if (typeValue == _activeIndicatorValue) return;
         _spriteRenderer.sprite = happy;
         AllTheImportantThings(typeValue);
         _indicatorAnimator.AnimateToSize(_startScale, _startScale * 1.3f, .4f, RepeatMode.PingPong);
-        _indicatorAnimator.AnimateToColor(Color.yellow, Color.green, .8f, RepeatMode.PingPong);
+        _indicatorAnimator.AnimateToColor(Palette.yellow, Palette.green, .8f, RepeatMode.PingPong);
     }
 
     public void PanicIndicator()
@@ -112,7 +113,7 @@ public class MoodIndicator : MonoBehaviour
             _spriteRenderer.sprite = panic;
             AllTheImportantThings(typeValue);
             _indicatorAnimator.AnimateToSize(_startScale, _startScale * 1.4f, .3f, RepeatMode.PingPong);
-            _indicatorAnimator.AnimateToColor(Color.white, Color.red, .3f, RepeatMode.PingPong);
+            _indicatorAnimator.AnimateToColor(Color.white, Palette.red, .3f, RepeatMode.PingPong);
         }
     }
 
