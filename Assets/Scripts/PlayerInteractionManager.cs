@@ -21,7 +21,7 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _lightRechargeProgress;
 
-    private const float c_pentagramMaxTime = 5.0f;
+    private const float c_pentagramMaxTime = 4.0f;
     private const float c_vaseMaxTime = 10.0f;
 
     private float _pentagramRemainingTime = 0.0f;
@@ -38,7 +38,6 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private bool _potentialEffectShowned = false;
 
-    // Start is called before the first frame update
     void Awake()
     {
         _instance = this;
@@ -82,7 +81,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
         Vector3 adjustedWorldPos = new Vector3(worldPos.x, 3.66f, worldPos.z);
 
-        RaycastHit[] hits = Physics.SphereCastAll(adjustedWorldPos, 6.0f, Vector3.one);
+        /*RaycastHit[] hits = Physics.SphereCastAll(adjustedWorldPos, 1.0f, Vector3.one);
 
         foreach (RaycastHit hit in hits)
         {
@@ -90,7 +89,7 @@ public class PlayerInteractionManager : MonoBehaviour
             {
                 return true;
             }
-        }
+        }*/
 
         return false;
     }
