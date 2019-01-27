@@ -6407,11 +6407,21 @@ PrefabInstance:
       propertyPath: m_MatchWidthOrHeight
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4088594767740912366, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088594767740912366, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4194201141501157798, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8ae39ecc6d6d525499026acd02f6cd2d,
+      objectReference: {fileID: 21300000, guid: 37decc327ed58f4439dd06f8aab83886,
         type: 3}
     - target: {fileID: 4194201141501157798, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
@@ -6432,7 +6442,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a027564bfcc43674e85b30a7ec6f6a3d,
+      objectReference: {fileID: 21300000, guid: 859c5381df4813344b0a4fb903aa45f4,
         type: 3}
     - target: {fileID: 2063441361, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
       propertyPath: m_havePropertiesChanged
