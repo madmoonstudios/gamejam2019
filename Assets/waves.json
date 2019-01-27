@@ -4,7 +4,7 @@
       "name": "level1",
       "buyers": [
         {
-          "waitSeconds": 0,
+          "waitSeconds": 10,
           "name": "techbro",
           "interestPoints": [
             {
@@ -21,6 +21,204 @@
           "interestPoints": [
             {
               "id": "bathroom"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "businessman",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "businessman",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "businessman",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "clown",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "clown",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "businessman",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 5,
+          "name": "oldlady",
+          "interestPoints": [
+            {
+              "id": "media_room"
             }
           ]
         }
