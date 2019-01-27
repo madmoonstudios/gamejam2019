@@ -185,7 +185,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         if (_moveTargetType == MoveTargetType.REALTOR)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
             return true;
         }
 
