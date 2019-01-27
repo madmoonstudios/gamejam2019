@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using System.IO;
 
 public class BuyerSpawner : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class BuyerSpawner : MonoBehaviour
         this._buyersRemaining = this.buyerNumber;
         _waitTime = UnityEngine.Random.Range(3.0f, 10.0f);
         StartCoroutine(Spawn());
+
+        var globalConfigData = this.LoadArchetypeData("/archetypes-full.json");
+        Debug.Log(JsonUtility.ToJson(globalConfigData, true));
+
+        var waveConfigData = this.LoadWaveData("/waves.json");
+        Debug.Log(JsonUtility.ToJson(waveConfigData, true));
     }
 
     private IEnumerator Spawn()
@@ -60,4 +67,41 @@ public class BuyerSpawner : MonoBehaviour
 
         }
     }
+
+    private GlobalConfigData LoadArchetypeData(string jsonFilePath)
+    {
+        string filePath = Application.dataPath + jsonFilePath;
+
+        GlobalConfigData globalConfigData;
+        if (File.Exists(filePath))
+        {
+            string dataAsJson = File.ReadAllText(filePath);
+           globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
+        }
+        else
+        {
+            globalConfigData = new GlobalConfigData();
+        }
+        return globalConfigData;
+
+       
+    }
+
+    private WavesConfigData LoadWaveData(string jsonFilePath)
+    {
+        string wavesConfigFilePath = Application.dataPath + jsonFilePath;
+        WavesConfigData wavesConfigData;
+
+        if (File.Exists(wavesConfigFilePath))
+        {
+            string waveJsonData = File.ReadAllText(wavesConfigFilePath);
+            wavesConfigData = JsonUtility.FromJson<WavesConfigData>(waveJsonData);
+        }
+        else
+        {
+            wavesConfigData = new WavesConfigData();
+        }
+        return wavesConfigData;
+    }
+
 }

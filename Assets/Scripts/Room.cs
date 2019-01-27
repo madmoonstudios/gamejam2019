@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum RoomType
 {
     KITCHEN, LIVING_ROOM, BEDROOM, BATHROOMS, CLOSETS, STUDY

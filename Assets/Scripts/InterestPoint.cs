@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum InterestPointObjectType
 {
-    ART, FURNITURE
+    NONE, ART, FURNITURE
 }
 
 public class InterestPoint : MonoBehaviour

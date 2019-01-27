@@ -1,0 +1,165 @@
+{
+  "archetypes": [
+    {
+      "name": "techbro",
+      "moveSpeed": 50,
+      "runSpeed": 100,
+      "fearVulnerability": 0.5,
+      "fearResistance": 0.5,
+      "buyingIntent": 50,
+      "fearStamina": 100,
+      "interestPoints": [
+        {
+          "id": "bedroom"
+        },
+        {
+          "id": "media_room"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "I can do my startup here",
+          "alignment": 1
+        },
+
+        {
+          "text": "This is lit",
+          "alignment": 0.5
+        },
+
+        {
+          "text": "Weird flex but ok",
+          "alignment": -0.5
+        },
+        {
+          "text": "F* that noise",
+          "alignment": -1
+        }
+      ]
+    },
+    {
+      "name": "oldlady",
+      "moveSpeed": 30,
+      "runSpeed": 70,
+      "fearVulnerability": 0.2,
+      "fearResistance": 0.2,
+      "buyingIntent": 60,
+      "fearStamina": 80,
+      "interestPoints": [
+        {
+          "id": "kitchen"
+        },
+        {
+          "id": "foyer"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "my grandchildren will love this",
+          "alignment": 1
+        },
+
+        {
+          "text": "Does this spark joy?",
+          "alignment": 0.5
+        },
+
+        {
+          "text": "my back is hurting",
+          "alignment": -0.5
+        },
+        {
+          "text": "I don't know what I am doing here",
+          "alignment": -1
+        }
+      ]
+    },
+    {
+      "name": "artist",
+      "moveSpeed": 100,
+      "runSpeed": 100,
+      "fearVulnerability": 0.6,
+      "fearResistance": 0.6,
+      "buyingIntent": 20,
+      "fearStamina": 100,
+      "interestPoints": [
+        {
+          "id": "media_room"
+        },
+        {
+          "id": "foyer"
+        },
+        {
+          "id": "bedroom"
+        },
+        {
+          "id": "living_room"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "This will be my masterpiece",
+          "alignment": 1
+        },
+
+        {
+          "text": "HWhat is beauty?",
+          "alignment": 0.5
+        },
+
+        {
+          "text": "This is some HP Lovecraft s*",
+          "alignment": -0.5
+        },
+        {
+          "text": "I am done",
+          "alignment": -1
+        }
+      ]
+    },
+    {
+      "name": "businessman",
+      "moveSpeed": 80,
+      "runSpeed": 100,
+      "fearVulnerability": 0.1,
+      "fearResistance": 0.1,
+      "buyingIntent": 10,
+      "fearStamina": 100,
+      "interestPoints": [
+        {
+          "id": "media_room"
+
+        },
+        {
+          "id": "foyer"
+        },
+        {
+          "id": "bedroom"
+        },
+        {
+          "id": "study_room"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "I will destroy this house and build a mall!",
+          "alignment": 1
+        },
+
+        {
+          "text": "PErfect for my next investment",
+          "alignment": 0.5
+        },
+
+        {
+          "text": "mmm I don't know about this ROI",
+          "alignment": -0.5
+        },
+        {
+          "text": "I think I'll buy more stock instead",
+          "alignment": -1
+        }
+      ]
+    }
+  ]
+}

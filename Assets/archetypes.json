@@ -1,0 +1,20 @@
+{
+  "archetypes": [{
+      "name":"artist",
+      "moveSpeed":1.0,
+      "runSpeed":1.0,
+      "fearVulnerability":1,
+      "fearResistance":0.2,
+      "buyingIntent":40,
+      "fearStamina":100,
+      "interestPoints":[
+         {
+            "id":"art"
+         }
+      ],
+      "phrases":{
+         "text":"Woa",
+         "alignment":0.0
+      }
+  }]
+}
