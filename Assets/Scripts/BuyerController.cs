@@ -17,16 +17,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private ProgressBarPro _fearBar;
 
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
-
-    internal void TryDestroy()
-    {
-        if (_moveTargetType == MoveTargetType.FLEE)
-        {
-            GameManager._instance.AddToScore();
-            Destroy(this.gameObject);
-        }
-    }
-
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
     private float _fearDecrementAmount = 5;             // Standard fear lost over time.
@@ -59,20 +49,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToUnvisitedRoom()
     {
-        if (_roomsLeftToVisit.Count == 0)
-        {
-            // TODO(samkern): If the scare level is a certain amount, do not attempt to purchase the house, keep moving between rooms
-            MoveToRealtor(); // We have visited all rooms; try to purchase the house.
-        }
-        else
-        { 
-            // Randomly select a room to go to first.
-            _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
+        // Randomly select a room to go to first.
+        _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
             
-            // Start moving toward that room.
-            _moveTargetType = MoveTargetType.ROOM;
-            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].transform);
-        }
+        // Start moving toward that room.
+        _moveTargetType = MoveTargetType.ROOM;
+        _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].transform);
     }
 
     internal bool IsScared()
@@ -159,8 +141,19 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
+                
                 _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
-                MoveToUnvisitedRoom();
+                
+                // TODO(samkern): Do not attempt to purchase house if we are scared.
+                if (_roomsLeftToVisit.Count == 0)
+                {
+                    MoveToRealtor(); // We have visited all rooms; try to purchase the house.
+                }
+                else
+                {
+                    MoveToUnvisitedRoom();
+                }
+
                 break;
             case MoveTargetType.REALTOR:
                 TryEndGame();
@@ -174,5 +167,14 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     public void RegisterCallback()
     {
         _npcMovement.SetNPCMovementCallback(this);
+    }
+    
+    internal void TryDestroy()
+    {
+        if (_moveTargetType == MoveTargetType.FLEE)
+        {
+            GameManager._instance.AddToScore();
+            Destroy(this.gameObject);
+        }
     }
 }

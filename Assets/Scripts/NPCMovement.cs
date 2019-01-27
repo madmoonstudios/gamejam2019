@@ -31,7 +31,8 @@ public class NPCMovement : MonoBehaviour
         _agent.isStopped = true;
         _agent.stoppingDistance = 2.0f;
 
-        _navAgentHeight = transform.position.y;
+        _navAgentHeight = 2; // TODO(samkern): make this a global
+        transform.position = new Vector3(transform.position.x, _navAgentHeight, transform.position.z);
     }
 
     /// <summary>
