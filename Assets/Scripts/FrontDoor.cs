@@ -10,4 +10,18 @@ public class FrontDoor : MonoBehaviour
     {
         frontDoorTransform = transform;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnCollisionStay(collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        BuyerController buyer = collision.transform.GetComponent<BuyerController>();
+        if (buyer != null)
+        {
+            buyer.TryDestroy();
+        }
+    }
 }

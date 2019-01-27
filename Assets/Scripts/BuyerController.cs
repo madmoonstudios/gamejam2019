@@ -8,7 +8,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 {
     enum MoveTargetType
     {
-        ROOM, REALTOR, FLEE
+        NONE, ROOM, REALTOR, FLEE
     }
 
     [SerializeField] private float _fearLevelCurrent = 0;
@@ -17,12 +17,22 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private ProgressBarPro _fearBar;
 
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
+
+    internal void TryDestroy()
+    {
+        if (_moveTargetType == MoveTargetType.FLEE)
+        {
+            GameManager._instance.AddToScore();
+            Destroy(this.gameObject);
+        }
+    }
+
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
     private float _fearDecrementAmount = 5;             // Standard fear lost over time.
 
-    private List<int> _roomsLeftToVisit;
-    private int _roomNextToVisit;
+    [SerializeField] private List<int> _roomsLeftToVisit;
+    [SerializeField] private int _nextRoomIndex;
     
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
@@ -33,12 +43,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {        
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
+        RegisterCallback();
         _fearBar = GetComponentInChildren<ProgressBarPro>();
     }
 
     public void Start()
     {
-        RegisterCallback();
         
         // Intialize array of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
@@ -55,13 +65,13 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             MoveToRealtor(); // We have visited all rooms; try to purchase the house.
         }
         else
-        {
+        { 
             // Randomly select a room to go to first.
-            _roomNextToVisit = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
-
+            _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
+            
             // Start moving toward that room.
             _moveTargetType = MoveTargetType.ROOM;
-            _npcMovement.SetMoveTarget(Room.allRooms[_roomNextToVisit].transform);
+            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].transform);
         }
     }
 
@@ -73,6 +83,17 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     internal float GetSpookLevel()
     {
         return _fearLevelCurrent / _fearLevelMax;
+    }
+
+    internal bool TryEndGame()
+    {
+        if (_moveTargetType == MoveTargetType.REALTOR)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            return true;
+        }
+
+        return false;
     }
 
     private void MoveToRealtor()
@@ -91,7 +112,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare()
     {
-        Debug.Log("I am scared");
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
     }
@@ -135,15 +155,18 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         switch (_moveTargetType)
         {
+            case MoveTargetType.NONE:
+                Debug.Log("No movement type set; doing nothing");
+                break;
             case MoveTargetType.ROOM:
-                _roomsLeftToVisit.Remove(_roomNextToVisit);
+                _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
                 MoveToUnvisitedRoom();
                 break;
             case MoveTargetType.REALTOR:
-                Debug.Log("Realtor reached; game is lost.");
+                TryEndGame();
                 break;
             case MoveTargetType.FLEE:
-                Debug.Log("Front door reached; increase score!");
+                TryDestroy();
                 break;
         }
     }
