@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Pentagram : MonoBehaviour
+public class Pentagram : FearInducer
 {
-    [SerializeField]
-    private TextMeshPro _countdownText;
-
     [SerializeField]
     private int _maxTimeSeconds;
     
@@ -26,25 +23,15 @@ public class Pentagram : MonoBehaviour
 
     private IEnumerator ScareThenDissapear()
     {
-        _countdownText.text = "-";
         yield return new WaitForSeconds(2.0f);
 
         for (int timeLeft = _maxTimeSeconds; timeLeft > 0; timeLeft--)
         {
             _collisionMesh.enabled = false;
-            _countdownText.text = timeLeft.ToString();
 
             yield return new WaitForSeconds(0.9f);
-            RaycastHit [] hits = Physics.SphereCastAll(this.transform.position, _fearRadius, Vector3.one);
-
-            foreach (RaycastHit hit in hits)
-            {
-                IFearable fearable = hit.transform.GetComponentInChildren<IFearable>();
-                if (fearable != null)
-                {
-                    fearable.Scare();
-                }
-            }
+            
+            base.ScareInRadius(this.transform.position, _fearRadius);
 
             _collisionMesh.enabled = true;
             yield return new WaitForSeconds(0.1f);

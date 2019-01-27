@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SwitchLight : MonoBehaviour, IClickable
+public class SwitchLight : FearInducer, IClickable
 {
     [SerializeField]
     private Light _light;
@@ -20,6 +20,7 @@ public class SwitchLight : MonoBehaviour, IClickable
         {
             _light.intensity = 0;
             yield return new WaitForSeconds(UnityEngine.Random.Range(.01f, .1f));
+            base.ScareInRadius(this.transform.position, 20.0f);
             _light.intensity = maxIntensity;
             yield return new WaitForSeconds(UnityEngine.Random.Range(.01f, .1f));
         }
