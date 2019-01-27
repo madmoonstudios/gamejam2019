@@ -1,0 +1,30 @@
+{
+  "waves": [
+    {
+      "name": "level1",
+      "buyers": [
+        {
+          "waitSeconds": 0,
+          "name": "techbro",
+          "interestPoints": [
+            {
+              "id": "bedroom"
+            },
+            {
+              "id": "media_room"
+            }
+          ]
+        },
+        {
+          "waitSeconds": 3,
+          "name": "clown",
+          "interestPoints": [
+            {
+              "id": "bathroom"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
