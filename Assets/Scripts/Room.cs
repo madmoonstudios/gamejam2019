@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum RoomType
 {
-    KITCHEN, LIVING_ROOM, BEDROOM, BATHROOM
+    KITCHEN, LIVING_ROOM, BEDROOM, BATHROOMS, CLOSETS, STUDY
 }
 
 public class Room : MonoBehaviour
