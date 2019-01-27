@@ -13,6 +13,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private float _fearLevelCurrent = 0;
 
+    private float _mildScaredLevel = 30;
+    private float _scaredLevel = 50;
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
@@ -70,12 +72,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
             _spriteAnimator.StartAnimating();
             _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
+            if(_roomsLeftToVisit.Count == 1)
+            {
+                Debug.Log("Last room index is : " + Room.allRooms[_nextRoomIndex]);
+            }
         }
     }
 
     private void MoveToRealtor()
     {
-        Debug.Log(gameObject.name + " Attempt purchase house");
         StopCoroutine(PauseBeforeNextMove());
         _npcMovement.SetSpeed(1.4f);
         PurchaseHouseIndicator();
@@ -108,15 +113,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         DoFearChecks();
         _animator.DoFearFlicker();
     }
-    
+
     internal bool IsScaredMild()
     {
-        return _fearLevelCurrent > _fearLevelMax / 3.0f;
+        return _fearLevelCurrent > _mildScaredLevel;
     }
-    
+
     internal bool IsScared()
     {
-        return _fearLevelCurrent > _fearLevelMax / 2.0f;
+        return _fearLevelCurrent >= _scaredLevel;
     }
 
     internal float GetSpookLevel()
@@ -151,19 +156,31 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             FleeHouse();         // OMG leave, dis too scary
         }
         // If the buyer is not scared and they have visited all rooms.
-        else if (_fearLevelCurrent <= (_fearLevelMax / 2.0f) && _roomsLeftToVisit.Count == 0 && _moveTargetType != MoveTargetType.REALTOR)
+        else if (!IsScared() && _roomsLeftToVisit.Count == 0 && _moveTargetType != MoveTargetType.REALTOR)
         {
             MoveToRealtor();     // Go buy the house!
         }
-        else if (IsScared() && _moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
+        else if (IsScaredMild() && _moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
         {
-            Debug.Log(gameObject.name + " too scared to purchase: " + _fearLevelCurrent);
             _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.PURCHASE_HOUSE);
+
+
+            // Add additional rooms to go visit
+            int mod = (int) Mathf.Floor(Room.allRooms.Count / 2.0f);
+            int lowAdjust = UnityEngine.Random.Range(0, mod);
+            int highAdjust = UnityEngine.Random.Range(0, mod) + lowAdjust;
+            _roomsLeftToVisit = Enumerable.Range(lowAdjust, (Room.allRooms.Count - highAdjust)).ToList();
             MoveToNextRoom();
         }
         
         if(IsScaredMild()) _moodIndicator.ScaredIndicator();
-        else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
+        else
+        {
+            if (_moveTargetType == MoveTargetType.REALTOR) // TODO(samkern): Fix this hack, which basically ensures the purchase house indicator is shown
+                _moodIndicator.PurchaseHouseIndicator();
+            
+            else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
+        }
     }
 
     internal bool TryEndGame()
