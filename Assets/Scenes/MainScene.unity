@@ -294,6 +294,12 @@ Transform:
   m_Father: {fileID: 2147144830}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0.51000005, z: -0.087000005}
+--- !u!212 &48027613 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7679828750478547041, guid: 6cfa7377c8510e7468c3fb98fb200476,
+    type: 3}
+  m_PrefabInstance: {fileID: 1508321154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &62099815
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +618,11 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 83420977}
+    - target: {fileID: 7679828750478547040, guid: 6cfa7377c8510e7468c3fb98fb200476,
+        type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 1356674622}
     - target: {fileID: 4191846601848947751, guid: 6cfa7377c8510e7468c3fb98fb200476,
         type: 3}
       propertyPath: m_Size.x
@@ -2094,6 +2105,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 76136582}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &925779058 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7679828750478547041, guid: 6cfa7377c8510e7468c3fb98fb200476,
+    type: 3}
+  m_PrefabInstance: {fileID: 2024431912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &938523936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,6 +2955,12 @@ Transform:
   m_Father: {fileID: 2147144830}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 89.3, z: 0}
+--- !u!212 &1211662504 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7679828750478547041, guid: 6cfa7377c8510e7468c3fb98fb200476,
+    type: 3}
+  m_PrefabInstance: {fileID: 1961516924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1261877786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3371,6 +3394,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 41.8, y: 19.1, z: 46}
   m_Center: {x: 0.38284302, y: 0, z: 11.442863}
+--- !u!212 &1356674622 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7679828750478547041, guid: 6cfa7377c8510e7468c3fb98fb200476,
+    type: 3}
+  m_PrefabInstance: {fileID: 76136582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1376416271
 GameObject:
   m_ObjectHideFlags: 0
@@ -4193,6 +4222,11 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 1077953834}
+    - target: {fileID: 7679828750478547040, guid: 6cfa7377c8510e7468c3fb98fb200476,
+        type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 48027613}
     - target: {fileID: 4191846601848947751, guid: 6cfa7377c8510e7468c3fb98fb200476,
         type: 3}
       propertyPath: m_Size.x
@@ -5176,6 +5210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomType: 0
   objectType: 0
+--- !u!212 &1843252173 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7679828750478547041, guid: 6cfa7377c8510e7468c3fb98fb200476,
+    type: 3}
+  m_PrefabInstance: {fileID: 1956317016}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1863242496
 GameObject:
   m_ObjectHideFlags: 0
@@ -5499,6 +5539,11 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 2064043569}
+    - target: {fileID: 7679828750478547040, guid: 6cfa7377c8510e7468c3fb98fb200476,
+        type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 1843252173}
     - target: {fileID: 4191846601848947751, guid: 6cfa7377c8510e7468c3fb98fb200476,
         type: 3}
       propertyPath: m_Size.x
@@ -5664,6 +5709,11 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 1325796085}
+    - target: {fileID: 7679828750478547040, guid: 6cfa7377c8510e7468c3fb98fb200476,
+        type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 1211662504}
     - target: {fileID: 4191846601848947751, guid: 6cfa7377c8510e7468c3fb98fb200476,
         type: 3}
       propertyPath: m_Size.x
@@ -6333,6 +6383,11 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 617595071}
+    - target: {fileID: 7679828750478547040, guid: 6cfa7377c8510e7468c3fb98fb200476,
+        type: 3}
+      propertyPath: _renderer
+      value: 
+      objectReference: {fileID: 925779058}
     - target: {fileID: 4191846601848947751, guid: 6cfa7377c8510e7468c3fb98fb200476,
         type: 3}
       propertyPath: m_Size.x
