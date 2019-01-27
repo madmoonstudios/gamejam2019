@@ -31,10 +31,5 @@ public class SpawnVisitors : MonoBehaviour
             this._buyersRemaining--;
 
         }
-        //for (int i = 0; i < this.buyerNumber; i++)
-        //{
-        //    yield return new WaitForSeconds(_waitTime); 
-        //    GameObject.Instantiate(_visitor, this.transform.position, Quaternion.identity, null);
-        //}
     }
 }
