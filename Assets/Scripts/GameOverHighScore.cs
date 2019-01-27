@@ -11,7 +11,7 @@ public class GameOverHighScore : MonoBehaviour
     void Start()
     {
         _gameOverText.text = string.Format(
-            "House Haunters, High Score: {0}", 
+            "High Score: {0}", 
             PlayerPrefs.GetInt("HighScore", 0));
     }
 
