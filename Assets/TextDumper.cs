@@ -35,8 +35,12 @@ public class TextDumper : MonoBehaviour
     {
         for (int i = 0; i < text.Count; i++)
         {
-            while (!_clicked)
+            float rTime = UnityEngine.Random.Range(1.0f, 2.0f);
+            float tPassed = 0.0f;
+
+            while (!_clicked && tPassed < rTime)
             {
+                tPassed += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
             _clicked = false;
