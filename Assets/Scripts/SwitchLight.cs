@@ -47,7 +47,7 @@ public class SwitchLight : FearInducer, IClickable
 
             foreach (IFearable fearable in SwitchFearableContainer())
             {
-                fearable.Scare();
+                fearable.Scare(10.0f);
             }
 
             _light.intensity = maxIntensity;

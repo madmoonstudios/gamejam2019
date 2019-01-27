@@ -13,13 +13,17 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private float _fearLevelCurrent = 0;
 
-    private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
-    private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
-    private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
-    private float _fearDecrementAmount = 10;             // Standard fear lost over time.
+    public float _fearLevelInitial = 0f;               // Standard fear for a new buyer.
+    public float _fearLevelMax = 100f;                  // The fear level at which the buyer will flee the house.
+    public float _fearIncrementRatio = 1.0f;            // Standard fear gained when scared.
+    public float _fearDecrementRatio = 1.0f;             // Standard fear lost over time.
+    public float _fearDecrementAmount = 10.0f;
+    public float _moveSpeed = 1.0f;
+    public float _runSpeed = 1.0f;
+    public List<InterestPoint> _interestPoints = new List<InterestPoint>();
 
     [SerializeField] private List<int> _roomsLeftToVisit;
-    [SerializeField] private int _nextRoomIndex;
+    [SerializeField] private int _nextRoomIndex = 0;
 
     private SpriteAnimator _spriteAnimator;
     private MoodIndicator _moodIndicator;
@@ -30,16 +34,17 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private float leisurely = 0.0f;    
         
     // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
+    // At this point the configuration should have been set and it is ok to use these values.
     private void ConfigureStats()
     {
         leisurely = UnityEngine.Random.Range(0.0f, 1.0f);
+        _fearLevelCurrent = _fearLevelInitial;
     }
 
     void Awake()
     {
         _moodIndicator = GetComponentInChildren<MoodIndicator>();
         _spriteAnimator = GetComponentInChildren<SpriteAnimator>();
-        _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
         RegisterCallback();
         ConfigureStats();
@@ -51,11 +56,19 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
         MoveToNextRoom();
         
-        StartCoroutine(DecrementFear());
+        // TODO(dandov): Consider enabling this back later on.
+        // StartCoroutine(DecrementFear());
     }
 
     private void MoveToNextRoom()
     {
+        //if (_nextRoomIndex < _interestPoints.Count)
+        //{
+        //    _moveTargetType = MoveTargetType.ROOM;
+        //    _npcMovement.SetMoveTarget(_interestPoints[_nextRoomIndex].transform);
+        //    _nextRoomIndex++;
+        //}
+
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
         {
@@ -68,6 +81,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
             _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
         }
+
     }
 
     private void MoveToRealtor()
@@ -86,10 +100,10 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     }
 
     // IFearable
-    public void Scare()
+    public void Scare(float scareAmount)
     {
         _moodIndicator.ScaredIndicator();
-        _fearLevelCurrent += _fearIncrementAmount;
+        _fearLevelCurrent += _fearIncrementRatio * scareAmount;
         DoFearChecks();
         _animator.DoFearFlicker();
     }
@@ -117,7 +131,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         while (true)
         {
             yield return new WaitForSeconds(_fearDecrementInterval);
-            _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
+            _fearLevelCurrent = Mathf.Clamp(
+                _fearLevelCurrent - (_fearDecrementRatio * _fearDecrementAmount), 0, _fearLevelMax);
             DoFearChecks();
         }
     }

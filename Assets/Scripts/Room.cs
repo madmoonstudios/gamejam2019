@@ -11,6 +11,7 @@ public enum RoomType
 public class Room : MonoBehaviour
 {
     public static List<Room> allRooms = new List<Room>();
+    public static Dictionary<RoomType, Room> roomsMap = new Dictionary<RoomType, Room>();
     private InterestPoint[] _myInterestPoints;
     [SerializeField] private RoomType _roomType;
 
@@ -20,6 +21,7 @@ public class Room : MonoBehaviour
         _myInterestPoints = GetComponentsInChildren<InterestPoint>();
         
         allRooms.Add(this);
+        roomsMap[_roomType] = this;
         foreach (InterestPoint interestPoint in GetComponentsInChildren<InterestPoint>())
         {
             interestPoint.roomType = _roomType;

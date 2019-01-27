@@ -9,7 +9,7 @@ public class DummyFearable : MonoBehaviour, IFearable
         throw new System.NotImplementedException();
     }
 
-    void IFearable.Scare()
+    void IFearable.Scare(float scareAmount)
     {
         Debug.Log("I am scared");
     }
