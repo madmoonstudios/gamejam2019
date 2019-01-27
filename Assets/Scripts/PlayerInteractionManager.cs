@@ -70,7 +70,26 @@ public class PlayerInteractionManager : MonoBehaviour
 
     internal bool CannotPentagram()
     {
-        return _pentagramRemainingTime > 0;
+        if (_pentagramRemainingTime > 0)
+        {
+            return true;
+        }
+
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
+
+        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 3.66f, worldPos.z);
+
+        RaycastHit[] hits = Physics.SphereCastAll(adjustedWorldPos, 6.0f, Vector3.one);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.GetComponentInChildren<Pentagram>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     internal bool CannotSwitchLight()
@@ -145,7 +164,7 @@ public class PlayerInteractionManager : MonoBehaviour
             return false;
         }
 
-        if (_pentagramRemainingTime > 0)
+        if (CannotPentagram())
         {
             return false;
         }
