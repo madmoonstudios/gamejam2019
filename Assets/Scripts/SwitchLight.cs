@@ -48,6 +48,11 @@ public class SwitchLight : FearInducer, IClickable
 
     private void OnMouseOver()
     {
+        if (PlayerInteractionManager._instance.CannotSwitchLight())
+        {
+            return;
+        }
+
         Debug.Log("Mouse captured");
 
         foreach (IFearable fearable in SwitchFearableContainer())
