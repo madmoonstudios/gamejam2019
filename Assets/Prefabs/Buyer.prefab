@@ -138,6 +138,7 @@ MonoBehaviour:
   _fearBar: {fileID: 5536879346085524069}
   _roomsLeftToVisit: 
   _nextRoomIndex: 0
+  _animator: {fileID: 1910511956744437569}
 --- !u!114 &2583122799501671200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2583122800074681630}
   - component: {fileID: 2583122800074681601}
-  - component: {fileID: 4267245497406143838}
+  - component: {fileID: 3393497762389208737}
+  - component: {fileID: 1910511956744437569}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -268,18 +270,37 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 988
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
---- !u!114 &4267245497406143838
+--- !u!95 &3393497762389208737
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583122800074681631}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1910511956744437569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -483,51 +504,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
-      propertyPath: graphic
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114918722265824728, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: rectTrans
       value: 
-      objectReference: {fileID: 5537640710792153981}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key0.r
-      value: 0.85490197
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key0.g
-      value: 0.034173448
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key0.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key1.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key1.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.key1.b
-      value: 0.098634005
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.ctime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: barGradient.m_NumColorKeys
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5644026229973728789}
     - target: {fileID: 114848760575897724, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
       propertyPath: graphic
@@ -588,35 +584,60 @@ PrefabInstance:
       propertyPath: barGradient.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114918722265824728, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: rectTrans
-      value: 
-      objectReference: {fileID: 5644026229973728789}
-    - target: {fileID: 114305709728790688, guid: 8f52384d62c91dc45976963b8557d732,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 5537640710792153981}
     - target: {fileID: 114603148587983506, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
       propertyPath: m_Text
       value: 47
       objectReference: {fileID: 0}
-    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
+    - target: {fileID: 114305709728790688, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
-      propertyPath: m_Color.r
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 5537640710792153981}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: graphic
+      value: 
+      objectReference: {fileID: 5537640710792153981}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.key0.r
+      value: 0.85490197
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.key0.g
+      value: 0.034173448
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.key0.b
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
-      propertyPath: m_Color.g
+      propertyPath: barGradient.key1.r
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114289952002292670, guid: 8f52384d62c91dc45976963b8557d732,
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
         type: 3}
-      propertyPath: m_Color.b
-      value: 0
+      propertyPath: barGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.key1.b
+      value: 0.098634005
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983940162169102, guid: 8f52384d62c91dc45976963b8557d732,
+        type: 3}
+      propertyPath: barGradient.m_NumColorKeys
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f52384d62c91dc45976963b8557d732, type: 3}

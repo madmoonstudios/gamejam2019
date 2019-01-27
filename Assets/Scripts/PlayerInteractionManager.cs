@@ -34,6 +34,8 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private float _currentFear;
 
+    private bool _potentialEffectShowned = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,6 +53,26 @@ public class PlayerInteractionManager : MonoBehaviour
 
         _lightRechargeProgress.SetValue(_lightRemainingTime / c_lightMaxTime);
         _lightRemainingTime -= Time.deltaTime;
+
+        if (!_potentialEffectShowned)
+        {
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
+            ShowPotentiallyScaredInRadius(new Vector3(worldPos.x, 3.66f, worldPos.z) , Pentagram.c_fearRadius);
+        }
+    }
+    
+    public static void ShowPotentiallyScaredInRadius(Vector3 position, float fearRadius)
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(position, fearRadius, Vector3.one);
+
+        foreach (RaycastHit hit in hits)
+        {
+            IFearable fearable = hit.transform.GetComponentInChildren<IFearable>();
+            if (fearable != null)
+            {
+                fearable.ShowPotentiallyScarable();
+            }
+        }
     }
 
     private void LateUpdate()

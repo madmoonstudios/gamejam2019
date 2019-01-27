@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxTimeSeconds: 10
-  _collisionMesh: {fileID: 0}
+  _fearRadius: 5

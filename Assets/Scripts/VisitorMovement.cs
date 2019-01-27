@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisitorMovement : MonoBehaviour, IFearable
+public class VisitorMovement : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D _rigidbody;
@@ -23,10 +23,5 @@ public class VisitorMovement : MonoBehaviour, IFearable
             _rigidbody.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * _movementForce);
             yield return new WaitForSeconds(1.0f);
         }
-    }
-
-    void IFearable.Scare()
-    {
-        throw new System.NotImplementedException();
     }
 }

@@ -9,8 +9,7 @@ public class Pentagram : FearInducer
     [SerializeField]
     private int _maxTimeSeconds;
     
-    [SerializeField]
-    private float _fearRadius;
+    public static float c_fearRadius = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +25,7 @@ public class Pentagram : FearInducer
         {
             yield return new WaitForSeconds(0.9f);
             
-            base.ScareInRadius(this.transform.position, _fearRadius);
+            base.ScareInRadius(this.transform.position, c_fearRadius);
             yield return new WaitForSeconds(0.1f);
         }
 

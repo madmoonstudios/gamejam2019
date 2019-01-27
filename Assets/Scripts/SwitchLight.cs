@@ -26,6 +26,11 @@ public class SwitchLight : FearInducer, IClickable
         }
     }
 
+    private void OnMouseOver()
+    {
+        PlayerInteractionManager.ShowPotentiallyScaredInRadius(this.transform.position, 20.0f);
+    }
+
     private void OnMouseDown()
     {
         PlayerInteractionManager._instance.TrySwitchLight(this);
