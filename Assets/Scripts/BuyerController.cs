@@ -103,13 +103,14 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     }
 
     private float _fearDecrementInterval = 5.0f;
+
     /// <summary>
     /// Coroutine that periodically decrements the fear level of the NPC.
     /// </summary>
     private IEnumerator DecrementFear()
     {
         while (true)
-        { 
+        {
             yield return new WaitForSeconds(_fearDecrementInterval);
             _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
             _fearBar.SetValue(_fearLevelCurrent, _fearLevelMax);
@@ -156,18 +157,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
-                
+
                 _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
-                
-                // TODO(samkern): Do not attempt to purchase house if we are scared.
-                if (_roomsLeftToVisit.Count == 0 && !IsScared())
-                {
-                    MoveToRealtor(); // We have visited all rooms; try to purchase the house.
-                }
-                else
-                {
-                    MoveToNextRoom();
-                }
+                PauseBeforeNextMove();
 
                 break;
             case MoveTargetType.REALTOR:
@@ -177,6 +169,26 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 TryDestroy();
                 break;
         }
+    }
+
+    private void PauseBeforeNextMove()
+    {
+        _npcMovement.PauseMoving();
+        Invoke("ResumeMoving", leisurely * 10.0f);
+    }
+
+    private void ResumeMoving()
+    {
+        // TODO(samkern): Do not attempt to purchase house if we are scared.
+        if (_roomsLeftToVisit.Count == 0 && !IsScared())
+        {
+            MoveToRealtor(); // We have visited all rooms; try to purchase the house.
+        }
+        else
+        {
+            MoveToNextRoom();
+        }
+        _npcMovement.ResumeMoving();
     }
 
     public void RegisterCallback()
