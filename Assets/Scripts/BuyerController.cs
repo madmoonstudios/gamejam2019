@@ -25,6 +25,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     [SerializeField] private int _nextRoomIndex;
 
     private SpriteAnimator _spriteAnimator;
+    private MoodIndicator _moodIndicator;
     
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
@@ -38,7 +39,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     }
 
     void Awake()
-    {        
+    {
+        _moodIndicator = GetComponentInChildren<MoodIndicator>();
         _spriteAnimator = GetComponentInChildren<SpriteAnimator>();
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
@@ -74,12 +76,14 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToRealtor()
     {
+        _moodIndicator.PurchaseHouseIndicator();
         _moveTargetType = MoveTargetType.REALTOR;
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
     }
 
     private void FleeHouse()
     {
+        _moodIndicator.PanicIndicator();
         _moveTargetType = MoveTargetType.FLEE;
         _npcMovement.SetMoveTarget(FrontDoor.frontDoorTransform);
         StopCoroutine(DecrementFear());    // The buyer is panicking; do not reduce fear over time.
@@ -88,6 +92,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare()
     {
+        _moodIndicator.ScaredIndicator();
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
         _animator.DoFearFlicker();
@@ -124,14 +129,21 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void DoFearChecks()
     {
+        if (_moveTargetType == MoveTargetType.FLEE) return; // We are already fleeing; do nothing else
+        
         if (_fearLevelCurrent >= _fearLevelMax)
         {
             FleeHouse();         // OMG leave, dis too scary
         }
         // If the buyer is not scared and they have visited all rooms.
-        else if (_fearLevelCurrent <= 0 && _roomsLeftToVisit.Count == 0)
+        else if (_fearLevelCurrent <= (_fearLevelMax / 2.0f) && _roomsLeftToVisit.Count == 0 && _moveTargetType != MoveTargetType.REALTOR)
         {
             MoveToRealtor();     // Go buy the house!
+        }
+        else if (_moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
+        {
+            _moodIndicator.ShrinkIndicator();
+            MoveToNextRoom();
         }
     }
 
@@ -161,10 +173,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
-
                 _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
                 PauseBeforeNextMove();
-
                 break;
             case MoveTargetType.REALTOR:
                 TryEndGame();
@@ -177,9 +187,20 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void PauseBeforeNextMove()
     {
+        float time = leisurely * 10.0f;
         _spriteAnimator.StopAnimating();
         _npcMovement.PauseMoving();
-        Invoke("ResumeMoving", leisurely * 10.0f);
+        if(!IsScared()) _moodIndicator.HappyIndicator();
+        Invoke("ResumeMoving", time);
+        /*if (!IsScared())
+        {
+            Invoke("ShowHappyIndicator", time / 2.0f);
+        }*/
+    }
+
+    private void ShowHappyIndicator()
+    {
+        _moodIndicator.HappyIndicator();
     }
 
     private void ResumeMoving()
