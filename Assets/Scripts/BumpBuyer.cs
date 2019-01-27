@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class BumpBuyer : MonoBehaviour
 {
-    [SerializeField]
     private BuyerController _controller;
-    [SerializeField]
     private Rigidbody _rigidbody;
+    private NPCMovement _npcMovement;
     private const float c_bounceForce = 10.0f;
+    // TODO(samkern): Update and fix if possible :(
+/*    
+    private void Awake()
+    {
+        _controller = GetComponent<BuyerController>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _npcMovement = GetComponent<NPCMovement>();
+        _rigidbody.mass = 10.0f;
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -24,15 +32,22 @@ public class BumpBuyer : MonoBehaviour
     private void Bump(BumpBuyer bumpBuyer)
     {
         Vector3 bounceVector = this.transform.position - bumpBuyer.transform.position;
-        _rigidbody.AddForce(bounceVector * c_bounceForce);
-        if (bumpBuyer.IsScared())
+        _rigidbody.AddForce(bounceVector * c_bounceForce * UnityEngine.Random.Range(.5f, 1.5f));
+        //_npcMovement.SetAgentVelocity(_rigidbody.velocity);
+        //StartCoroutine(UpdateAgentVelocity());
+        if (_controller.IsScared())
         {
             _controller.Scare();
         }
     }
 
-    private bool IsScared()
+    private float _agentVelocityUpdateInterval;
+    private IEnumerator UpdateAgentVelocity()
     {
-        return _controller.IsScared();
-    }
+        while (true)
+        {
+            _npcMovement.SetAgentVelocity(_rigidbody.velocity);
+            yield return new WaitForSeconds(_agentVelocityUpdateInterval);
+        }
+    }*/
 }

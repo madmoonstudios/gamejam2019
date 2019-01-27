@@ -10,7 +10,7 @@ public enum InterestPointObjectType
 
 public class InterestPoint : MonoBehaviour
 {
-    public RoomType roomType;
+    public RoomType roomType; // We don't actually use this - remove if that continues to be the case!
     public InterestPointObjectType objectType;
 
     public void AddToLists()

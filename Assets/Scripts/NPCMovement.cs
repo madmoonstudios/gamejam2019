@@ -18,36 +18,30 @@ public class NPCMovement : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform _moveTarget;
     private float _moveSpeedCurrent;
-    private float _moveSpeedNormal = 5f;
+    private float _moveSpeedNormal = 1f;
     private float _navAgentHeight;
 
     private INPCMovementCallback _movementCallback;
+    
+    
+    // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
+    private void ConfigureStats()
+    {
+        _agent.stoppingDistance = 2.0f;
+        _moveSpeedNormal = UnityEngine.Random.Range(1.0f, 3.0f);
+        _moveSpeedCurrent = _moveSpeedNormal;
+    }
 
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _moveSpeedCurrent = _moveSpeedNormal;
-        _agent.speed = _moveSpeedCurrent;
         _agent.isStopped = true;
-        _agent.stoppingDistance = 2.0f;
 
-        _navAgentHeight = transform.position.y;
-    }
-
-    /// <summary>
-    /// Set the agent's move destination to a static position.
-    /// </summary>
-    /// <param name="position">static position for the agent to move to.</param>
-    public void SetMoveTarget(Vector3 position)
-    {
-        // TODO(samkern): Destroy transform if it is no longer being moved to.
-        Transform t = new GameObject().transform;
-        t.position = position;
-        _moveTarget = t;
-
-        _agent.isStopped = false;
-        _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
-        StopCoroutine(UpdateDestination());
+        _navAgentHeight = 2; // TODO(samkern): make this a global
+        transform.position = new Vector3(transform.position.x, _navAgentHeight, transform.position.z);
+        
+        ConfigureStats();
+        _agent.speed = _moveSpeedCurrent;
     }
 
     /// <summary>
@@ -64,11 +58,10 @@ public class NPCMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Stop the agent's movement, but do not clear its target.
+    /// Pause the agent's movement, but do not clear its target.
     /// </summary>
-    public void StopMoving()
+    public void PauseMoving()
     {
-        Debug.Log("Stop Moving");
         _agent.isStopped = true;
     }
 
@@ -81,13 +74,15 @@ public class NPCMovement : MonoBehaviour
     }
     
     private float _destinationUpdateInterval = .2f;
+    private bool updateDestinationRunning = false;
     
     /// <summary>
     /// Coroutine that periodically updates the agent's destination based on its current target.
     /// </summary>
     private IEnumerator UpdateDestination()
     {
-        while (true)
+        updateDestinationRunning = true;
+        while (_moveTarget != null)
         {
             _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
             yield return new WaitForSeconds(_destinationUpdateInterval);
@@ -103,8 +98,7 @@ public class NPCMovement : MonoBehaviour
 
     public void Update()
     {
-        if (_agent.isStopped || _agent.pathPending) return;
-        
+        if (_moveTarget == null || _agent.isStopped || _agent.pathPending) return;
         // Check if we've reached the destination
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
@@ -118,11 +112,17 @@ public class NPCMovement : MonoBehaviour
     private void HasReachedTarget()
     {
         _agent.isStopped = true;
+        _moveTarget = null;
         _movementCallback.TargetReached();
     }
 
     public void SetNPCMovementCallback(INPCMovementCallback moveCallback)
     {
         _movementCallback = moveCallback;
+    }
+
+    public void SetAgentVelocity(Vector3 velocity)
+    {
+        _agent.velocity = velocity;
     }
 }
