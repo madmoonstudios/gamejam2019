@@ -75,7 +75,7 @@
       ]
     },
     {
-      "name": "artist",
+      "name": "clown",
       "moveSpeed": 100,
       "runSpeed": 100,
       "fearVulnerability": 0.6,
