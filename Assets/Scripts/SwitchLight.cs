@@ -78,8 +78,6 @@ public class SwitchLight : FearInducer, IClickable
             return;
         }
 
-        Debug.Log("Mouse captured");
-
         foreach (IFearable fearable in SwitchFearableContainer())
         {
             fearable.ShowPotentiallyScarable();
