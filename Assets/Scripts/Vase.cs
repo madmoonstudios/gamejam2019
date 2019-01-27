@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Vase : MonoBehaviour, IClickable
+public class Vase : FearInducer, IClickable
 {
     void IClickable.Interact()
     {
@@ -11,5 +11,6 @@ public class Vase : MonoBehaviour, IClickable
     private void OnMouseDown()
     {
         PlayerInteractionManager._instance.TryBreakVase(this);
+        base.ScareInRadius(this.transform.position, 20.0f);
     }
 }
