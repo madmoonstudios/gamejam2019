@@ -10,10 +10,9 @@ public class SetScoreText : MonoBehaviour, IScoreObserver
 
     public void SetScore(int score)
     {
-        _scoreText.text = string.Format("Buyers spooked: {0}", score);
+        _scoreText.text = ""+score;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         GameManager._instance.AttachScoreObserver(this);

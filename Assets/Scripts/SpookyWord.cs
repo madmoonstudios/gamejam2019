@@ -19,7 +19,7 @@ internal class SpookyWord : MonoBehaviour
         {
             _text.alpha += UnityEngine.Random.Range(-.1f, .05f);
 
-            yield return new WaitForSeconds(.1f);
+            yield return 0;//new WaitForSeconds(.1f);
         }
 
         Destroy(this.gameObject);
