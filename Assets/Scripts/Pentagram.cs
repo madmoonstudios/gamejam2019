@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class Pentagram : FearInducer
 {
-    [SerializeField]
-    private int _maxTimeSeconds;
+    private int _maxTimeSeconds = 4;
     
     public static float c_fearRadius = 2.0f;
 
