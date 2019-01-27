@@ -5,13 +5,13 @@ using System.IO;
 
 public class BuyerDataReader : MonoBehaviour
 {
-    public ArchetypeData gameData;
-    private string gameDataProjectFilePath = "/archetypes.json";
+    public GlobalConfigData gameData;
+    private string gameDataProjectFilePath = "/archetypes-full.json";
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("START");
-        this.LoadGameData(); 
+        this.LoadGameData();
     }
 
     // Update is called once per frame
@@ -27,14 +27,15 @@ public class BuyerDataReader : MonoBehaviour
         if (File.Exists(filePath))
         {
             string dataAsJson = File.ReadAllText(filePath);
-            gameData = JsonUtility.FromJson<ArchetypeData>(dataAsJson);
+            gameData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
+            Debug.Log(JsonUtility.ToJson(gameData, true));
         }
         else
         {
-            gameData = new ArchetypeData();
+            gameData = new GlobalConfigData();
             Debug.Log("No load");
         }
-        Debug.Log("GameData name '" + gameData.name + "'" + " path " + filePath);
+        Debug.Log("GameData name \"" + gameData.archetypes[0].name + "\"" + " path " + filePath);
     }
 
     private void SaveGameData()

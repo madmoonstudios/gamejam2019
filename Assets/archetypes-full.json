@@ -1,0 +1,42 @@
+{
+  "archetypes": [
+    {
+      "name": "techbro",
+      "moveSpeed": 50,
+      "runSpeed": 100,
+      "fearVulnerability": 0.5,
+      "fearResistance": 0.5,
+      "buyingIntent": 50,
+      "fearStamina": 100,
+      "interestPoints": [
+        {
+          "id": "bedroom"
+        },
+        {
+          "id": "media_room"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "I can do my startup here",
+          "alignment": 1
+        },
+
+        {
+          "text": "This is lit",
+          "alignment": 0.5
+        },
+
+        {
+          "text": "Weird flex but ok",
+          "alignment": -0.5
+        },
+        {
+          "text": "F* that noise",
+          "alignment": -1
+        }
+      ]
+    }
+
+  ]
+}
