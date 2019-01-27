@@ -258,12 +258,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1208254429 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1275102689250528295, guid: 393567f4a42355c43a0e860b0902f41d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1509946486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1230667225
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +425,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1509946486
+--- !u!1001 &1652325269
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -446,7 +440,7 @@ PrefabInstance:
     - target: {fileID: 4589764785294491824, guid: 393567f4a42355c43a0e860b0902f41d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.38
+      value: 7.48
       objectReference: {fileID: 0}
     - target: {fileID: 4589764785294491824, guid: 393567f4a42355c43a0e860b0902f41d,
         type: 3}
@@ -456,7 +450,7 @@ PrefabInstance:
     - target: {fileID: 4589764785294491824, guid: 393567f4a42355c43a0e860b0902f41d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.82
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 4589764785294491824, guid: 393567f4a42355c43a0e860b0902f41d,
         type: 3}
@@ -498,25 +492,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1275102689250528295, guid: 393567f4a42355c43a0e860b0902f41d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 37decc327ed58f4439dd06f8aab83886,
-        type: 3}
-    - target: {fileID: 8324628403120885101, guid: 393567f4a42355c43a0e860b0902f41d,
-        type: 3}
-      propertyPath: alsfhjfszdkjhfskjd
-      value: 
-      objectReference: {fileID: 21300000, guid: 835ceacfb393d154c9b6302da4809569,
-        type: 3}
-    - target: {fileID: 8324628403120885101, guid: 393567f4a42355c43a0e860b0902f41d,
-        type: 3}
-      propertyPath: askdjalkdjaslkdjalksjdsaklj
-      value: 
-      objectReference: {fileID: 1208254429}
-    m_RemovedComponents:
-    - {fileID: 1198488212220519091, guid: 393567f4a42355c43a0e860b0902f41d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393567f4a42355c43a0e860b0902f41d, type: 3}
 --- !u!1 &1765572409
 GameObject:
