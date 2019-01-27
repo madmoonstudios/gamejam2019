@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7679828750478547043}
   - component: {fileID: 7679828750478547040}
-  - component: {fileID: 7679828750478547055}
   - component: {fileID: 7679828750478547041}
+  - component: {fileID: 4191846601848947751}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -46,22 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _light: {fileID: 7679828750768940695}
---- !u!58 &7679828750478547055
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679828750478547042}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!212 &7679828750478547041
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -110,6 +94,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &4191846601848947751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679828750478547042}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.63, y: 3.1700008, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7679828750768940713
 GameObject:
   m_ObjectHideFlags: 0
