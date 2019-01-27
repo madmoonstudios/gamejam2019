@@ -111,9 +111,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.8
   m_Speed: 3.5
-  m_Acceleration: 10
+  m_Acceleration: 14
   avoidancePriority: 50
-  m_AngularSpeed: 240
+  m_AngularSpeed: 600
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -135,6 +135,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fearLevelCurrent: 0
+  _fearLevelInitial: 0
+  _fearLevelMax: 100
+  _fearIncrementRatio: 1
+  _fearDecrementRatio: 1
+  _fearDecrementAmount: 10
+  _moveSpeed: 1
+  _runSpeed: 1
+  _interestPoints: []
   _roomsLeftToVisit: 
   _nextRoomIndex: 0
   _animator: {fileID: 1910511956744437569}
@@ -390,12 +398,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1000
-  m_Sprite: {fileID: 21300000, guid: 707a075f110b54f239756bb0c888ee0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e190ce04b716f4655a4f1ad4840a1fef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.68, y: 7.68}
+  m_Size: {x: 4.78, y: 4.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -438,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3369499cf2c34c30b670c1f435ab840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 21300000, guid: 707a075f110b54f239756bb0c888ee0a, type: 3}
-  happy: {fileID: 21300000, guid: f140819363aab430893e5bee92872974, type: 3}
-  scared: {fileID: 21300000, guid: 122d65867a63c4147a8b42a70e70f85f, type: 3}
-  panic: {fileID: 21300000, guid: 91901c3238fc741c3af5432e991ac585, type: 3}
+  ghost: {fileID: 21300000, guid: 65891746abfcf43d8ae740409694c1a9, type: 3}
+  happy: {fileID: 21300000, guid: e190ce04b716f4655a4f1ad4840a1fef, type: 3}
+  scared: {fileID: 21300000, guid: 8974d35a29adc4d31ae32e7adc81fe75, type: 3}
+  panic: {fileID: 21300000, guid: bbd5818829d6e49708478721405fa984, type: 3}
