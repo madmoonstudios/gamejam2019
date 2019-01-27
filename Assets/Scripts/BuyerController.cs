@@ -56,6 +56,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToNextRoom()
     {
+        _npcMovement.SetSpeedMod(1.0f);
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
         {
@@ -72,6 +73,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToRealtor()
     {
+        _npcMovement.SetSpeedMod(1.0f);
         _moodIndicator.PurchaseHouseIndicator();
         _moveTargetType = MoveTargetType.REALTOR;
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
@@ -79,6 +81,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void FleeHouse()
     {
+        _npcMovement.SetSpeedMod(3f);
         _moodIndicator.PanicIndicator();
         _moveTargetType = MoveTargetType.FLEE;
         _npcMovement.SetMoveTarget(FrontDoor.frontDoorTransform);
@@ -186,17 +189,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         float time = leisurely * 10.0f;
         _spriteAnimator.StopAnimating();
         _npcMovement.PauseMoving();
-        if(!IsScared()) _moodIndicator.HappyIndicator();
+        //if(!IsScared()) _moodIndicator.HappyIndicator();
         Invoke("ResumeMoving", time);
-        /*if (!IsScared())
-        {
-            Invoke("ShowHappyIndicator", time / 2.0f);
-        }*/
-    }
-
-    private void ShowHappyIndicator()
-    {
-        _moodIndicator.HappyIndicator();
     }
 
     private void ResumeMoving()
