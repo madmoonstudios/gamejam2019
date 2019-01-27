@@ -47,20 +47,23 @@ public class SpriteAnimator : MonoBehaviour
 
     private void Update()
     {
-        _timeSinceCanBeFeared -= Time.deltaTime;
+        float newTimeSinceCanBeFeared = _timeSinceCanBeFeared - Time.deltaTime;
 
         if (isFlickering == true)
         {
             _renderer.color = Color.red;
+            _timeSinceCanBeFeared = newTimeSinceCanBeFeared;
             return;
         }
 
         if (_timeSinceCanBeFeared > 0.0f)
         {
             _renderer.color = Color.green;
+            _timeSinceCanBeFeared = newTimeSinceCanBeFeared;
             return;
         }
 
+        _timeSinceCanBeFeared = newTimeSinceCanBeFeared;
         _renderer.color = Color.white;
     }
 
@@ -90,6 +93,6 @@ public class SpriteAnimator : MonoBehaviour
 
     internal void CanBeFeard()
     {
-        _timeSinceCanBeFeared = 1.0f;
+        _timeSinceCanBeFeared = .01f;
     }
 }
