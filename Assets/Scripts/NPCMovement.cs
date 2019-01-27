@@ -17,7 +17,7 @@ public class NPCMovement : MonoBehaviour
 {    
     private NavMeshAgent _agent;
     [SerializeField] private Transform _moveTarget;
-    private float _moveSpeedNormal = 1f;
+    private float _moveSpeedNormal;
     private float _navAgentHeight;
 
     private INPCMovementCallback _movementCallback;
@@ -27,7 +27,7 @@ public class NPCMovement : MonoBehaviour
     private void ConfigureStats()
     {
         _agent.stoppingDistance = 2.0f;
-        _moveSpeedNormal = UnityEngine.Random.Range(1.0f, 3.0f);
+        _moveSpeedNormal = UnityEngine.Random.Range(2.0f, 6.0f);
         _agent.speed = _moveSpeedNormal;
     }
 
@@ -128,5 +128,10 @@ public class NPCMovement : MonoBehaviour
     public void SetSpeedMod(float speedMod)
     {
         _agent.speed = _moveSpeedNormal * speedMod;
+    }
+    
+    public void SetSpeed(float speed)
+    {
+        _agent.speed = speed;
     }
 }
