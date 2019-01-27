@@ -28,7 +28,7 @@ public class SpriteAnimator : MonoBehaviour
     {
         _timeSinceCanBeFeared -= Time.deltaTime;
 
-        if (_flickering == true)
+        if (isFlickering == true)
         {
             _renderer.color = Color.red;
             return;
@@ -62,7 +62,7 @@ public class SpriteAnimator : MonoBehaviour
     {
         isFlickering |= true;
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(.1f);
 
         isFlickering = false;
     }
