@@ -18,21 +18,30 @@ public class NPCMovement : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform _moveTarget;
     private float _moveSpeedCurrent;
-    private float _moveSpeedNormal = 5f;
+    private float _moveSpeedNormal = 1f;
     private float _navAgentHeight;
 
     private INPCMovementCallback _movementCallback;
+    
+    
+    // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
+    private void ConfigureStats()
+    {
+        _agent.stoppingDistance = 2.0f;
+        _moveSpeedNormal = UnityEngine.Random.Range(1.0f, 3.0f);
+        _moveSpeedCurrent = _moveSpeedNormal;
+    }
 
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _moveSpeedCurrent = _moveSpeedNormal;
-        _agent.speed = _moveSpeedCurrent;
         _agent.isStopped = true;
-        _agent.stoppingDistance = 2.0f;
 
         _navAgentHeight = 2; // TODO(samkern): make this a global
         transform.position = new Vector3(transform.position.x, _navAgentHeight, transform.position.z);
+        
+        ConfigureStats();
+        _agent.speed = _moveSpeedCurrent;
     }
 
     /// <summary>
