@@ -11,6 +11,18 @@ public class SwitchLight : FearInducer, IClickable
     [SerializeField]
     private SwitchContainer container;
 
+    private Color _startingColor;
+    private float _startingIntensity;
+
+    public bool isFlickering { get; private set; }
+
+    private void Awake()
+    {
+        _startingColor = _light.color;
+        _startingIntensity = _light.intensity;
+        StartCoroutine(AmbientFlicker());
+    }
+
     private List<IFearable> SwitchFearableContainer()
     {
         return container.GetFearablesInContainer();
@@ -23,6 +35,8 @@ public class SwitchLight : FearInducer, IClickable
 
     private IEnumerator FlickerLights()
     {
+        isFlickering = true;
+
         int lightFlicks = UnityEngine.Random.Range(2, 5);
         float maxIntensity = _light.intensity;
         for(int curFlick = 0; curFlick < lightFlicks; curFlick++)
@@ -44,6 +58,7 @@ public class SwitchLight : FearInducer, IClickable
         yield return new WaitForSeconds(3.0f);
         base.ScareInRadius(this.transform.position, 20.0f);
         _light.intensity = maxIntensity;
+        isFlickering = false;
     }
 
     private void OnMouseOver()
@@ -58,6 +73,30 @@ public class SwitchLight : FearInducer, IClickable
         foreach (IFearable fearable in SwitchFearableContainer())
         {
             fearable.ShowPotentiallyScarable();
+        }
+    }
+
+    private IEnumerator AmbientFlicker()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(.1f, 1.0f));
+            if (isFlickering)
+            {
+                continue;
+            }
+
+            if (PlayerInteractionManager._instance.CannotSwitchLight())
+            {
+                _light.color = _startingColor / UnityEngine.Random.Range(1.0f, 1.4f);
+                _light.intensity = _startingIntensity / UnityEngine.Random.Range(1.0f, 1.4f);
+
+            }
+            else
+            {
+                _light.color = _startingColor;
+                _light.intensity = _startingIntensity;
+            }
         }
     }
 
