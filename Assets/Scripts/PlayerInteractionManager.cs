@@ -19,7 +19,7 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField]
     private ProgressBarPro _lightRechargeProgress;
 
-    private const float c_pentagramMaxTime = 10.0f;
+    private const float c_pentagramMaxTime = 1.0f;
     private const float c_vaseMaxTime = 10.0f;
 
     private float _pentagramRemainingTime = 0.0f;
