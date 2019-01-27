@@ -47,15 +47,15 @@ public class PlayerInteractionManager : MonoBehaviour
     private void Update()
     {
         float prp = (Mathf.Max(0, _pentagramRemainingTime));
-        _pentagramRechargeProgress.text = prp == 0 ? "" : prp.ToString("0.00");
+        _pentagramRechargeProgress.text = prp == 0 ? "" : prp.ToString("0.0");
         _pentagramRemainingTime -= Time.deltaTime;
 
         float tV = (Mathf.Max(0, _vaseRemainingTime));
-        _vaseRechargeProgress.text = tV == 0 ? "" : tV.ToString("0.00");
+        _vaseRechargeProgress.text = tV == 0 ? "" : tV.ToString("0.0");
         _vaseRemainingTime -= Time.deltaTime;
 
         float lrp = (Mathf.Max(0, _lightRemainingTime));
-        _lightRechargeProgress.text = lrp == 0 ? "" : lrp.ToString("0.00") ;
+        _lightRechargeProgress.text = lrp == 0 ? "" : lrp.ToString("0.0") ;
         _lightRemainingTime -= Time.deltaTime;
 
 
