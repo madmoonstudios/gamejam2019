@@ -28,7 +28,7 @@ public class BuyerSpawner : MonoBehaviour
     {
         while (this._buyersRemaining > 0)
         {
-            yield return new WaitForSeconds(_waitTime);
+
 
             int layerMask = 1 << 8;
             // Everything but layer 8, floor should be in something OTHER than layer 8!
@@ -55,6 +55,7 @@ public class BuyerSpawner : MonoBehaviour
 
             agent.transform.position += new Vector3(0, agent.height / 2, 0);
             this._buyersRemaining--;
+            yield return new WaitForSeconds(_waitTime);
 
         }
     }
