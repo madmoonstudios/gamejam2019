@@ -25,19 +25,29 @@ public class Pentagram : FearInducer
         Color tmp = _renderer.color;
         tmp.a = 0.3f;
         _renderer.color = tmp;
-        yield return new WaitForSeconds(2.0f);
+        this.transform.localScale = Vector3.one * .1f;
+
+        float tPassed = 0.0f;
+        while (tPassed < 1.0f)
+        {
+            tPassed += Time.deltaTime;
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale, Vector3.one, tPassed);
+            yield return new WaitForEndOfFrame();
+        }
+
         tmp.a = 1.0f;
         _renderer.color = tmp;
 
         for (int timeLeft = _maxTimeSeconds; timeLeft > 0; timeLeft--)
         {
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(0.1f);
             _renderer.color = Color.black;
 
 
             base.ScareInRadius(this.transform.position, c_fearRadius);
             yield return new WaitForSeconds(0.1f);
             _renderer.color = Color.white;
+            yield return new WaitForSeconds(0.8f);
         }
 
         Destroy(this.gameObject);
