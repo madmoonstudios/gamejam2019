@@ -23,14 +23,13 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private List<int> _roomsLeftToVisit;
     [SerializeField] private int _nextRoomIndex;
+
+    private SpriteAnimator _spriteAnimator;
     
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
 
-    private float leisurely = 0.0f;
-    
-    // TODO(samkern): Choose an interest point randomly within the room to go visit.
-    
+    private float leisurely = 0.0f;    
         
     // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
     private void ConfigureStats()
@@ -40,6 +39,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     void Awake()
     {        
+        _spriteAnimator = GetComponentInChildren<SpriteAnimator>();
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
         RegisterCallback();
@@ -90,6 +90,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
+        _animator.DoFearFlicker();
     }
     
     internal bool IsScared()
@@ -103,6 +104,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     }
 
     private float _fearDecrementInterval = 5.0f;
+
+    [SerializeField]
+    private SpriteAnimator _animator;
 
     /// <summary>
     /// Coroutine that periodically decrements the fear level of the NPC.
@@ -173,6 +177,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void PauseBeforeNextMove()
     {
+        _spriteAnimator.StopAnimating();
         _npcMovement.PauseMoving();
         Invoke("ResumeMoving", leisurely * 10.0f);
     }
@@ -188,6 +193,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             MoveToNextRoom();
         }
+        _spriteAnimator.StartAnimating();
         _npcMovement.ResumeMoving();
     }
 
