@@ -61,7 +61,7 @@ public class PlayerInteractionManager : MonoBehaviour
         }
     }
     
-    private void ShowPotentiallyScaredInRadius(Vector3 position, float fearRadius)
+    public static void ShowPotentiallyScaredInRadius(Vector3 position, float fearRadius)
     {
         RaycastHit[] hits = Physics.SphereCastAll(position, fearRadius, Vector3.one);
 
