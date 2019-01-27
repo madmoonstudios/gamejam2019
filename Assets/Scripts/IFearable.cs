@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IFearable
 {
-    void Scare();
+    void Scare(float scareAmount);
     void ShowPotentiallyScarable();
 }

@@ -11,7 +11,7 @@ public class FearInducer : MonoBehaviour
             IFearable fearable = hit.transform.GetComponentInChildren<IFearable>();
             if (fearable != null)
             {
-                fearable.Scare();
+                fearable.Scare(10.0f);
             }
         }
     }
