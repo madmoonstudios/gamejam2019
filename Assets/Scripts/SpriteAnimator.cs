@@ -14,16 +14,36 @@ public class SpriteAnimator : MonoBehaviour
     [SerializeField]
     private float _timeBetweenFrames;
 
-    // Start is called before the first frame update
+    private bool _animatingMovement = false;
+
     void Start()
     {
-        StartCoroutine(Animate());
+        StartAnimating();
+    }
+
+    public void StartAnimating()
+    {
+        if (!_animatingMovement)
+        {
+            _animatingMovement = true;
+            StartCoroutine(Animate());
+        }
+    }
+    
+    public void StopAnimating()
+    {
+        if (_animatingMovement)
+        {
+            _renderer.sprite = _sprites[2];   // Hard coded to the image of the visitor standing.
+            _animatingMovement = false;
+            StopCoroutine(Animate());
+        }
     }
 
     private IEnumerator Animate()
     {
         int frame = 0;
-        while (true)
+        while (_animatingMovement)
         {
             _renderer.sprite = _sprites[frame++ % _sprites.Length]; 
             yield return new WaitForSeconds(_timeBetweenFrames);
