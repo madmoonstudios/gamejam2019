@@ -17,7 +17,7 @@ internal class SpookyWord : MonoBehaviour
     {
         while (_text.alpha > 0)
         {
-            _text.alpha += UnityEngine.Random.Range(-.1f, .05f);
+            _text.alpha += UnityEngine.Random.Range(-.075f, .05f);
 
             yield return 0;//new WaitForSeconds(.1f);
         }
