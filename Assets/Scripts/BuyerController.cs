@@ -19,15 +19,24 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
-    private float _fearDecrementAmount = 5;             // Standard fear lost over time.
+    private float _fearDecrementAmount = 10;             // Standard fear lost over time.
 
     [SerializeField] private List<int> _roomsLeftToVisit;
     [SerializeField] private int _nextRoomIndex;
     
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
+
+    private float leisurely = 0.0f;
     
     // TODO(samkern): Choose an interest point randomly within the room to go visit.
+    
+        
+    // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
+    private void ConfigureStats()
+    {
+        leisurely = UnityEngine.Random.Range(0.0f, 1.0f);
+    }
 
     void Awake()
     {        
@@ -35,47 +44,32 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _npcMovement = GetComponent<NPCMovement>();
         RegisterCallback();
         _fearBar = GetComponentInChildren<ProgressBarPro>();
+        ConfigureStats();
     }
 
     public void Start()
     {
-        
         // Intialize array of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
-        MoveToUnvisitedRoom();
+        MoveToNextRoom();
         
         StartCoroutine(DecrementFear());
     }
 
-    private void MoveToUnvisitedRoom()
+    private void MoveToNextRoom()
     {
-        // Randomly select a room to go to first.
-        _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
-            
-        // Start moving toward that room.
         _moveTargetType = MoveTargetType.ROOM;
-        _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].transform);
-    }
-
-    internal bool IsScared()
-    {
-        return _fearLevelCurrent > _fearLevelMax / 2.0f;
-    }
-
-    internal float GetSpookLevel()
-    {
-        return _fearLevelCurrent / _fearLevelMax;
-    }
-
-    internal bool TryEndGame()
-    {
-        if (_moveTargetType == MoveTargetType.REALTOR)
+        if (_roomsLeftToVisit.Count == 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-            return true;
+            int nextRoomIndex = UnityEngine.Random.Range(0, Room.allRooms.Count);
+            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
         }
-
-        return false;
+        else
+        {
+            //_nextRoomIndex is only used for unvisited rooms
+            _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
+            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
+        }
     }
 
     private void MoveToRealtor()
@@ -97,15 +91,26 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _fearLevelCurrent += _fearIncrementAmount;
         DoFearChecks();
     }
+    
+    internal bool IsScared()
+    {
+        return _fearLevelCurrent > _fearLevelMax / 2.0f;
+    }
 
-    private float _fearDecrementInterval = 2.0f;
+    internal float GetSpookLevel()
+    {
+        return _fearLevelCurrent / _fearLevelMax;
+    }
+
+    private float _fearDecrementInterval = 5.0f;
+
     /// <summary>
     /// Coroutine that periodically decrements the fear level of the NPC.
     /// </summary>
     private IEnumerator DecrementFear()
     {
         while (true)
-        { 
+        {
             yield return new WaitForSeconds(_fearDecrementInterval);
             _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
             _fearBar.SetValue(_fearLevelCurrent, _fearLevelMax);
@@ -125,6 +130,17 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             MoveToRealtor();     // Go buy the house!
         }
     }
+
+    internal bool TryEndGame()
+    {
+        if (_moveTargetType == MoveTargetType.REALTOR)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            return true;
+        }
+
+        return false;
+    }
     
     public void OnDestroy()
     {
@@ -141,18 +157,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
-                
+
                 _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
-                
-                // TODO(samkern): Do not attempt to purchase house if we are scared.
-                if (_roomsLeftToVisit.Count == 0)
-                {
-                    MoveToRealtor(); // We have visited all rooms; try to purchase the house.
-                }
-                else
-                {
-                    MoveToUnvisitedRoom();
-                }
+                PauseBeforeNextMove();
 
                 break;
             case MoveTargetType.REALTOR:
@@ -162,6 +169,26 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 TryDestroy();
                 break;
         }
+    }
+
+    private void PauseBeforeNextMove()
+    {
+        _npcMovement.PauseMoving();
+        Invoke("ResumeMoving", leisurely * 10.0f);
+    }
+
+    private void ResumeMoving()
+    {
+        // TODO(samkern): Do not attempt to purchase house if we are scared.
+        if (_roomsLeftToVisit.Count == 0 && !IsScared())
+        {
+            MoveToRealtor(); // We have visited all rooms; try to purchase the house.
+        }
+        else
+        {
+            MoveToNextRoom();
+        }
+        _npcMovement.ResumeMoving();
     }
 
     public void RegisterCallback()
