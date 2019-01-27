@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
@@ -12,15 +13,24 @@ public class PlayerInteractionManager : MonoBehaviour
     private GameObject _pentagram;
 
     [SerializeField]
-    private ProgressBarPro _pentagramRechargeProgress;
+    private TextMeshProUGUI _pentagramRechargeProgress;
     
     [SerializeField]
-    private ProgressBarPro _vaseRechargeProgress;
+    private TextMeshProUGUI _vaseRechargeProgress;
 
     [SerializeField]
-    private ProgressBarPro _lightRechargeProgress;
+    private TextMeshProUGUI _lightRechargeProgress;
 
-    private const float c_pentagramMaxTime = 1.0f;
+    [SerializeField]
+    private Image _pentagramIconRenderer;
+
+    [SerializeField]
+    private Image _vaseIconRenderer;
+
+    [SerializeField]
+    private Image _lightIconRenderer;
+
+    private const float c_pentagramMaxTime = 5.0f;
     private const float c_vaseMaxTime = 10.0f;
 
     private float _pentagramRemainingTime = 0.0f;
@@ -45,14 +55,20 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private void Update()
     {
-        _pentagramRechargeProgress.SetValue(_pentagramRemainingTime / c_pentagramMaxTime);
+        float prp = (Mathf.Max(0, _pentagramRemainingTime));
+
+        _pentagramRechargeProgress.text = prp == 0 ? "" : prp.ToString("0.0");
+        _pentagramIconRenderer.color = prp == 0 ? Color.white : Color.grey;
         _pentagramRemainingTime -= Time.deltaTime;
 
-
-        _vaseRechargeProgress.SetValue(_vaseRemainingTime / c_vaseMaxTime);
+        float tV = (Mathf.Max(0, _vaseRemainingTime));
+        _vaseRechargeProgress.text = tV == 0 ? "" : tV.ToString("0.0");
+        _vaseIconRenderer.color = tV == 0 ? Color.white : Color.grey;
         _vaseRemainingTime -= Time.deltaTime;
 
-        _lightRechargeProgress.SetValue(_lightRemainingTime / c_lightMaxTime);
+        float lrp = (Mathf.Max(0, _lightRemainingTime));
+        _lightRechargeProgress.text = lrp == 0 ? "" : lrp.ToString("0.0");
+        _lightIconRenderer.color = lrp == 0 ? Color.white : Color.grey;
         _lightRemainingTime -= Time.deltaTime;
 
 

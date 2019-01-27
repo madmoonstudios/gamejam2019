@@ -9,7 +9,7 @@ public class Pentagram : FearInducer
     [SerializeField]
     private int _maxTimeSeconds;
     
-    public static float c_fearRadius = 4.5f;
+    public static float c_fearRadius = 2.0f;
 
     [SerializeField]
     private SpriteRenderer _renderer;
@@ -31,7 +31,7 @@ public class Pentagram : FearInducer
         while (tPassed < 1.0f)
         {
             tPassed += Time.deltaTime;
-            this.transform.localScale = Vector3.Lerp(this.transform.localScale, Vector3.one, tPassed);
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale, Vector3.one *.5f, tPassed);
             yield return new WaitForEndOfFrame();
         }
 

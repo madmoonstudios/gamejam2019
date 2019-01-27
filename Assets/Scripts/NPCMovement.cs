@@ -17,8 +17,7 @@ public class NPCMovement : MonoBehaviour
 {    
     private NavMeshAgent _agent;
     [SerializeField] private Transform _moveTarget;
-    private float _moveSpeedCurrent;
-    private float _moveSpeedNormal = 1f;
+    private float _moveSpeedNormal;
     private float _navAgentHeight;
 
     private INPCMovementCallback _movementCallback;
@@ -28,8 +27,8 @@ public class NPCMovement : MonoBehaviour
     private void ConfigureStats()
     {
         _agent.stoppingDistance = 2.0f;
-        _moveSpeedNormal = UnityEngine.Random.Range(1.0f, 3.0f);
-        _moveSpeedCurrent = _moveSpeedNormal;
+        _moveSpeedNormal = UnityEngine.Random.Range(2.0f, 6.0f);
+        _agent.speed = _moveSpeedNormal;
     }
 
     void Awake()
@@ -41,7 +40,6 @@ public class NPCMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, _navAgentHeight, transform.position.z);
         
         ConfigureStats();
-        _agent.speed = _moveSpeedCurrent;
     }
 
     /// <summary>
@@ -125,5 +123,15 @@ public class NPCMovement : MonoBehaviour
     public void SetAgentVelocity(Vector3 velocity)
     {
         _agent.velocity = velocity;
+    }
+
+    public void SetSpeedMod(float speedMod)
+    {
+        _agent.speed = _moveSpeedNormal * speedMod;
+    }
+    
+    public void SetSpeed(float speed)
+    {
+        _agent.speed = speed;
     }
 }

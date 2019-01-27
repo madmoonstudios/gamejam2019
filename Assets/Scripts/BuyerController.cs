@@ -69,16 +69,19 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         //    _nextRoomIndex++;
         //}
 
+        _npcMovement.SetSpeedMod(1.0f);
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
         {
             int nextRoomIndex = UnityEngine.Random.Range(0, Room.allRooms.Count);
+            _spriteAnimator.StartAnimating();
             _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
         }
         else
         {
             //_nextRoomIndex is only used for unvisited rooms
             _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
+            _spriteAnimator.StartAnimating();
             _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
         }
 
@@ -86,15 +89,27 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToRealtor()
     {
-        _moodIndicator.PurchaseHouseIndicator();
+        Debug.Log(gameObject.name + " Attempt purchase house");
+        StopCoroutine(PauseBeforeNextMove());
+        _npcMovement.SetSpeed(1.4f);
+        PurchaseHouseIndicator();
         _moveTargetType = MoveTargetType.REALTOR;
+        _spriteAnimator.StartAnimating();
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
+    }
+
+    private void PurchaseHouseIndicator()
+    {
+        _moodIndicator.PurchaseHouseIndicator();
     }
 
     private void FleeHouse()
     {
+        StopCoroutine(PauseBeforeNextMove());
+        _npcMovement.SetSpeedMod(3f);
         _moodIndicator.PanicIndicator();
         _moveTargetType = MoveTargetType.FLEE;
+        _spriteAnimator.StartAnimating();
         _npcMovement.SetMoveTarget(FrontDoor.frontDoorTransform);
         StopCoroutine(DecrementFear());    // The buyer is panicking; do not reduce fear over time.
     }
@@ -102,10 +117,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare(float scareAmount)
     {
-        _moodIndicator.ScaredIndicator();
+        _moodIndicator.GhostIndicator();
         _fearLevelCurrent += _fearIncrementRatio * scareAmount;
         DoFearChecks();
         _animator.DoFearFlicker();
+    }
+    
+    internal bool IsScaredMild()
+    {
+        return _fearLevelCurrent > _fearLevelMax / 3.0f;
     }
     
     internal bool IsScared()
@@ -150,11 +170,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             MoveToRealtor();     // Go buy the house!
         }
-        else if (_moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
+        else if (IsScared() && _moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
         {
-            _moodIndicator.ShrinkIndicator();
+            Debug.Log(gameObject.name + " too scared to purchase: " + _fearLevelCurrent);
+            _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.PURCHASE_HOUSE);
             MoveToNextRoom();
         }
+        
+        if(IsScaredMild()) _moodIndicator.ScaredIndicator();
+        else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
     }
 
     internal bool TryEndGame()
@@ -183,9 +207,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
-                if (_roomsLeftToVisit.Count == 0)
+                if (_roomsLeftToVisit.Count != 0)
                     _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
-                PauseBeforeNextMove();
+                StartCoroutine(PauseBeforeNextMove());
                 break;
             case MoveTargetType.REALTOR:
                 TryEndGame();
@@ -196,37 +220,28 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         }
     }
 
-    private void PauseBeforeNextMove()
+    private IEnumerator PauseBeforeNextMove()
     {
         float time = leisurely * 10.0f;
         _spriteAnimator.StopAnimating();
         _npcMovement.PauseMoving();
-        if(!IsScared()) _moodIndicator.HappyIndicator();
-        Invoke("ResumeMoving", time);
-        /*if (!IsScared())
-        {
-            Invoke("ShowHappyIndicator", time / 2.0f);
-        }*/
-    }
+        //if(!IsScared()) _moodIndicator.HappyIndicator();
 
-    private void ShowHappyIndicator()
-    {
-        _moodIndicator.HappyIndicator();
-    }
+        yield return new WaitForSeconds(time);
 
-    private void ResumeMoving()
-    {
-        // TODO(samkern): Do not attempt to purchase house if we are scared.
-        if (_roomsLeftToVisit.Count == 0 && !IsScared())
-        {
-            MoveToRealtor(); // We have visited all rooms; try to purchase the house.
+        if (_moveTargetType != MoveTargetType.FLEE) // If we are already fleeing, do nothing
+        {      
+            if (_roomsLeftToVisit.Count == 0 && !IsScared())
+            {
+                MoveToRealtor(); // We have visited all rooms; try to purchase the house.
+            }
+            else
+            {
+                MoveToNextRoom();
+            }
+            _spriteAnimator.StartAnimating();
+            _npcMovement.ResumeMoving();
         }
-        else
-        {
-            MoveToNextRoom();
-        }
-        _spriteAnimator.StartAnimating();
-        _npcMovement.ResumeMoving();
     }
 
     public void RegisterCallback()
