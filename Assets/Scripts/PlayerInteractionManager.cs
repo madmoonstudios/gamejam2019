@@ -21,6 +21,15 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _lightRechargeProgress;
 
+    [SerializeField]
+    private Image _pentagramIconRenderer;
+
+    [SerializeField]
+    private Image _vaseIconRenderer;
+
+    [SerializeField]
+    private Image _lightIconRenderer;
+
     private const float c_pentagramMaxTime = 5.0f;
     private const float c_vaseMaxTime = 10.0f;
 
@@ -47,15 +56,19 @@ public class PlayerInteractionManager : MonoBehaviour
     private void Update()
     {
         float prp = (Mathf.Max(0, _pentagramRemainingTime));
+
         _pentagramRechargeProgress.text = prp == 0 ? "" : prp.ToString("0.0");
+        _pentagramIconRenderer.color = prp == 0 ? Color.white : Color.grey;
         _pentagramRemainingTime -= Time.deltaTime;
 
         float tV = (Mathf.Max(0, _vaseRemainingTime));
         _vaseRechargeProgress.text = tV == 0 ? "" : tV.ToString("0.0");
+        _vaseIconRenderer.color = tV == 0 ? Color.white : Color.grey;
         _vaseRemainingTime -= Time.deltaTime;
 
         float lrp = (Mathf.Max(0, _lightRemainingTime));
-        _lightRechargeProgress.text = lrp == 0 ? "" : lrp.ToString("0.0") ;
+        _lightRechargeProgress.text = lrp == 0 ? "" : lrp.ToString("0.0");
+        _lightIconRenderer.color = lrp == 0 ? Color.white : Color.grey;
         _lightRemainingTime -= Time.deltaTime;
 
 
