@@ -7241,6 +7241,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8646407006722343874, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 324964042752392722, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -7250,6 +7255,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 324964042752392722, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718386843058940300, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7094219518670777627, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
@@ -7261,6 +7276,16 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7094219518670777627, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 47815640717182893, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8597205137041933166, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -7270,6 +7295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597205137041933166, guid: 76a457903d139074dbb49c3859f029f1,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
