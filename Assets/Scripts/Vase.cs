@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class Vase : FearInducer, IClickable
 {
+    [SerializeField]
+    private Sprite sprite;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     void IClickable.Interact()
     {
-        Destroy(this.gameObject);
+        spriteRenderer.sprite = sprite;
     }
 
     private void OnMouseDown()
