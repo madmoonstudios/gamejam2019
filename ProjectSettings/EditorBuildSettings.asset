@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Over.unity
     guid: 575d1a8ed05e73741ae79572365aeb47
   - enabled: 1
+    path: Assets/Scenes/TextDumpScene.unity
+    guid: 4b8f6b2a403fa424bb40511c3786ba50
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: e7c529a0e58d1473fb7e60d9062226c9
   m_configObjects: {}
