@@ -29,4 +29,18 @@ public class SpriteAnimator : MonoBehaviour
             yield return new WaitForSeconds(_timeBetweenFrames);
         }
     }
+
+    internal void DoFearFlicker()
+    {
+        StartCoroutine(FearFlickerRoutine());
+    }
+
+    private IEnumerator FearFlickerRoutine()
+    {
+        _renderer.color = Color.red;
+
+        yield return new WaitForSeconds(.1f);
+
+        _renderer.color = Color.white;
+    }
 }
