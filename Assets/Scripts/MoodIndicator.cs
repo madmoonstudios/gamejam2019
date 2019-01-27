@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoodIndicator : MonoBehaviour
 {
-    private enum IndicatorType
+    public enum IndicatorType
     {
         NONE, HAPPY, PURCHASE_HOUSE, SCARED, GHOST, PANIC
     }
@@ -98,13 +98,10 @@ public class MoodIndicator : MonoBehaviour
     {
         Debug.Log("Purchase house");
         int typeValue = (int) IndicatorType.PURCHASE_HOUSE;
-        if (typeValue > _activeIndicatorValue)
-        {
-            _spriteRenderer.sprite = happy;
-            AllTheImportantThings(typeValue);
-            _indicatorAnimator.AnimateToSize(_startScale, _startScale * 1.3f, .4f, RepeatMode.PingPong);
-            _indicatorAnimator.AnimateToColor(Color.yellow, Color.green, .8f, RepeatMode.PingPong);
-        }
+        _spriteRenderer.sprite = happy;
+        AllTheImportantThings(typeValue);
+        _indicatorAnimator.AnimateToSize(_startScale, _startScale * 1.3f, .4f, RepeatMode.PingPong);
+        _indicatorAnimator.AnimateToColor(Color.yellow, Color.green, .8f, RepeatMode.PingPong);
     }
 
     public void PanicIndicator()
@@ -124,16 +121,25 @@ public class MoodIndicator : MonoBehaviour
         _activeIndicatorValue = (int) IndicatorType.NONE;
         _spriteRenderer.enabled = false;
     }
-    
-    public void HideScaredIndicator()
-    {
-        _activeIndicatorValue = (int) IndicatorType.NONE;
-        _spriteRenderer.enabled = false;
-    }
 
     public void ShrinkIndicator()
     {
         _indicatorAnimator.AnimateToSize(transform.localScale, Vector2.zero, .4f, RepeatMode.Once);
+        _activeIndicatorValue = (int) IndicatorType.NONE;
         Invoke("HideIndicator", .5f);
+    }
+    
+    /// <summary>
+    /// Only hide the indicator of a certain type, if it is being displayed.
+    /// </summary>
+    /// <param name="type">The indicator type to shrink</param>
+    public void ShrinkIndicatorByType(IndicatorType type)
+    {
+        if ((IndicatorType) _activeIndicatorValue == type)
+        {
+            _activeIndicatorValue = (int) IndicatorType.NONE;
+            _indicatorAnimator.AnimateToSize(transform.localScale, Vector2.zero, .4f, RepeatMode.Once);
+            Invoke("HideIndicator", .5f);
+        }
     }
 }
