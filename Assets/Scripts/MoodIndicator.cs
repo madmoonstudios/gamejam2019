@@ -63,6 +63,7 @@ public class MoodIndicator : MonoBehaviour
 
     public void PurchaseHouseIndicator()
     {
+        Debug.Log("Purchase house");
         int typeValue = (int) IndicatorType.PURCHASE_HOUSE;
         if (typeValue > _activeIndicatorValue)
         {
