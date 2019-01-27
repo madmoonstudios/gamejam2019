@@ -13,9 +13,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private float _fearLevelCurrent = 0;
 
-    [SerializeField]
-    private ProgressBarPro _fearBar;
-
     private float _fearLevelInitial = 40;               // Standard fear for a new buyer.
     private float _fearLevelMax = 100;                  // The fear level at which the buyer will flee the house.
     private float _fearIncrementAmount = 10;            // Standard fear gained when scared.
@@ -45,7 +42,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _fearLevelCurrent = _fearLevelInitial;
         _npcMovement = GetComponent<NPCMovement>();
         RegisterCallback();
-        _fearBar = GetComponentInChildren<ProgressBarPro>();
         ConfigureStats();
     }
 
@@ -60,6 +56,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToNextRoom()
     {
+        _npcMovement.SetSpeedMod(1.0f);
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
         {
@@ -76,6 +73,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToRealtor()
     {
+        _npcMovement.SetSpeedMod(1.0f);
         _moodIndicator.PurchaseHouseIndicator();
         _moveTargetType = MoveTargetType.REALTOR;
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
@@ -83,6 +81,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void FleeHouse()
     {
+        _npcMovement.SetSpeedMod(3f);
         _moodIndicator.PanicIndicator();
         _moveTargetType = MoveTargetType.FLEE;
         _npcMovement.SetMoveTarget(FrontDoor.frontDoorTransform);
@@ -122,7 +121,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             yield return new WaitForSeconds(_fearDecrementInterval);
             _fearLevelCurrent = Mathf.Clamp(_fearLevelCurrent - _fearDecrementAmount, 0, _fearLevelMax);
-            _fearBar.SetValue(_fearLevelCurrent, _fearLevelMax);
             DoFearChecks();
         }
     }
@@ -173,7 +171,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
                 Debug.Log("No movement type set; doing nothing");
                 break;
             case MoveTargetType.ROOM:
-                _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
+                if (_roomsLeftToVisit.Count == 0)
+                    _roomsLeftToVisit.RemoveAt(_nextRoomIndex);
                 PauseBeforeNextMove();
                 break;
             case MoveTargetType.REALTOR:
@@ -190,17 +189,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         float time = leisurely * 10.0f;
         _spriteAnimator.StopAnimating();
         _npcMovement.PauseMoving();
-        if(!IsScared()) _moodIndicator.HappyIndicator();
+        //if(!IsScared()) _moodIndicator.HappyIndicator();
         Invoke("ResumeMoving", time);
-        /*if (!IsScared())
-        {
-            Invoke("ShowHappyIndicator", time / 2.0f);
-        }*/
-    }
-
-    private void ShowHappyIndicator()
-    {
-        _moodIndicator.HappyIndicator();
     }
 
     private void ResumeMoving()
