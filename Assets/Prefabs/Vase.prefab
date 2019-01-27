@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4589764785294491824}
   - component: {fileID: 1275102689250528295}
   - component: {fileID: 8324628403120885101}
-  - component: {fileID: 5048506191122797619}
+  - component: {fileID: 9138282138537249630}
   m_Layer: 0
   m_Name: Vase
   m_TagString: Untagged
@@ -93,29 +93,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f57e588203af9a4982792a575c5e3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &5048506191122797619
-BoxCollider2D:
+--- !u!65 &9138282138537249630
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5412904648298217068}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4, y: 1.35}
-    newSize: {x: 1.4, y: 1.35}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.35}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.4, y: 1.3500004, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
