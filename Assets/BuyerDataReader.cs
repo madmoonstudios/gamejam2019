@@ -5,13 +5,16 @@ using System.IO;
 
 public class BuyerDataReader : MonoBehaviour
 {
-    public GlobalConfigData gameData;
+    public GlobalConfigData globalConfigData;
+
+    public WavesConfigData wavesConfigData;
     private string gameDataProjectFilePath = "/archetypes-full.json";
+    private string wavesConfigDataFilePath = "/waves.json";
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("START");
-        this.LoadGameData();
+        //this.LoadGameData();
     }
 
     // Update is called once per frame
@@ -27,20 +30,33 @@ public class BuyerDataReader : MonoBehaviour
         if (File.Exists(filePath))
         {
             string dataAsJson = File.ReadAllText(filePath);
-            gameData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
-            Debug.Log(JsonUtility.ToJson(gameData, true));
+            globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
+            Debug.Log(JsonUtility.ToJson(globalConfigData, true));
         }
         else
         {
-            gameData = new GlobalConfigData();
-            Debug.Log("No load");
+            globalConfigData = new GlobalConfigData();
         }
-        Debug.Log("GameData name \"" + gameData.archetypes[0].name + "\"" + " path " + filePath);
+
+        string wavesConfigFilePath = Application.dataPath + wavesConfigDataFilePath;
+
+
+        if (File.Exists(wavesConfigFilePath))
+        {
+            string waveJsonData = File.ReadAllText(wavesConfigFilePath);
+            wavesConfigData = JsonUtility.FromJson<WavesConfigData>(waveJsonData);
+            Debug.Log(JsonUtility.ToJson(wavesConfigData, true));
+        }
+        else
+        {
+            wavesConfigData = new WavesConfigData();
+        }
+        Debug.Log("GameData name \"" + globalConfigData.archetypes[0].name + "\"" + " path " + filePath);
     }
 
     private void SaveGameData()
     {
-        string dataAsJson = JsonUtility.ToJson(gameData);
+        string dataAsJson = JsonUtility.ToJson(globalConfigData);
 
         string filePath = Application.dataPath + gameDataProjectFilePath;
         File.WriteAllText(filePath, dataAsJson);

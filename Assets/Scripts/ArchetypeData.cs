@@ -50,3 +50,9 @@ public class WaveData
     public string name;
     public BuyerSpawn[] buyers;
 }
+
+[System.Serializable]
+public class WavesConfigData
+{
+    public WaveData[] waves;
+}
