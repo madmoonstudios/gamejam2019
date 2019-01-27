@@ -62,6 +62,7 @@ public class NPCMovement : MonoBehaviour
     /// </summary>
     public void PauseMoving()
     {
+        _agent.velocity = Vector3.zero;
         _agent.isStopped = true;
     }
 
