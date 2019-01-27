@@ -348,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 6102783267046672625}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.013, y: -0, z: 2.17}
-  m_LocalScale: {x: 0.25190276, y: 0.25190276, z: 0.25190276}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 2583122799501671230}
   m_RootOrder: 1
@@ -390,7 +390,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1000
-  m_Sprite: {fileID: 21300000, guid: 06a3ff65e65054adfab526eb8ced70cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 707a075f110b54f239756bb0c888ee0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3369499cf2c34c30b670c1f435ab840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 21300000, guid: 0146403cd8e414660af2e7b9e1fdb38a, type: 3}
-  happy: {fileID: 21300000, guid: 06a3ff65e65054adfab526eb8ced70cb, type: 3}
-  scared: {fileID: 21300000, guid: 7512aa3ab1b1348d3928447f61159bea, type: 3}
-  panic: {fileID: 21300000, guid: a61fac8c40a664e339614c8a77f5b16d, type: 3}
+  ghost: {fileID: 21300000, guid: 707a075f110b54f239756bb0c888ee0a, type: 3}
+  happy: {fileID: 21300000, guid: f140819363aab430893e5bee92872974, type: 3}
+  scared: {fileID: 21300000, guid: 122d65867a63c4147a8b42a70e70f85f, type: 3}
+  panic: {fileID: 21300000, guid: 91901c3238fc741c3af5432e991ac585, type: 3}

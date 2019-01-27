@@ -14,9 +14,6 @@ public class MouseCursor : MonoBehaviour
     [SerializeField]
     private Sprite _pentagram;
 
-
-
-
     public bool _lightHighlighted = false;
     public bool _vaseHighlighted = false;
 
@@ -27,7 +24,6 @@ public class MouseCursor : MonoBehaviour
         _instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
