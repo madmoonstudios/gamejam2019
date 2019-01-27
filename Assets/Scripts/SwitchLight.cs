@@ -61,6 +61,16 @@ public class SwitchLight : FearInducer, IClickable
         isFlickering = false;
     }
 
+    private void OnMouseEnter()
+    {
+        MouseCursor._instance._lightHighlighted = true;
+    }
+
+    private void OnMouseExit()
+    {
+        MouseCursor._instance._lightHighlighted = false;
+    }
+
     private void OnMouseOver()
     {
         if (PlayerInteractionManager._instance.CannotSwitchLight())

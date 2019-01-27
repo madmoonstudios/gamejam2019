@@ -20,6 +20,18 @@ public class Vase : FearInducer, IClickable
         base.ScareInRadius(this.transform.position, 20.0f);
     }
 
+
+
+    private void OnMouseEnter()
+    {
+        MouseCursor._instance._vaseHighlighted = true;
+    }
+
+    private void OnMouseExit()
+    {
+        MouseCursor._instance._vaseHighlighted = false;
+    }
+
     private void OnMouseOver()
     {
         if (PlayerInteractionManager._instance.CannotBreakVase())

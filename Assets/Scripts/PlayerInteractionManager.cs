@@ -68,7 +68,7 @@ public class PlayerInteractionManager : MonoBehaviour
         }
     }
 
-    private bool CannotPentagram()
+    internal bool CannotPentagram()
     {
         return _pentagramRemainingTime > 0;
     }
