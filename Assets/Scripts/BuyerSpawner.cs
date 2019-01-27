@@ -22,6 +22,7 @@ public class BuyerSpawner : MonoBehaviour
     void Start()
     {
         this._buyersRemaining = this.buyerNumber;
+        _waitTime = UnityEngine.Random.Range(3.0f, 10.0f);
         StartCoroutine(Spawn());
 
         var globalConfigData = this.LoadArchetypeData("/archetypes-full.json");

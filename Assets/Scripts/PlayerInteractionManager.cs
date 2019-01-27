@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
@@ -54,13 +55,34 @@ public class PlayerInteractionManager : MonoBehaviour
         _lightRechargeProgress.SetValue(_lightRemainingTime / c_lightMaxTime);
         _lightRemainingTime -= Time.deltaTime;
 
+
+        if (PlayerInteractionManager._instance.CannotPentagram())
+        {
+            return;
+        }
+
         if (!_potentialEffectShowned)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
             ShowPotentiallyScaredInRadius(new Vector3(worldPos.x, 3.66f, worldPos.z) , Pentagram.c_fearRadius);
         }
     }
-    
+
+    private bool CannotPentagram()
+    {
+        return _pentagramRemainingTime > 0;
+    }
+
+    internal bool CannotSwitchLight()
+    {
+        return _lightRemainingTime > 0;
+    }
+
+    internal bool CannotBreakVase()
+    {
+        return _vaseRemainingTime > 0;
+    }
+
     public static void ShowPotentiallyScaredInRadius(Vector3 position, float fearRadius)
     {
         RaycastHit[] hits = Physics.SphereCastAll(position, fearRadius, Vector3.one);

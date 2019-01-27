@@ -13,6 +13,6 @@ public class FixRotation : MonoBehaviour
     void LateUpdate()
     {
         transform.rotation = rotation;
-        transform.position = transform.parent.position + new Vector3(0, 0, 2);
+        transform.position = transform.parent.position + new Vector3(-1.6f, 0, 1.4f);
     }
 }

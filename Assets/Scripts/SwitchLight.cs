@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchLight : FearInducer, IClickable
 {
     [SerializeField]
     private Light _light;
+
+    [SerializeField]
+    private SwitchContainer container;
+
+    private List<IFearable> SwitchFearableContainer()
+    {
+        return container.GetFearablesInContainer();
+    }
 
     void IClickable.Interact()
     {
@@ -20,7 +29,13 @@ public class SwitchLight : FearInducer, IClickable
         {
             _light.intensity = 0;
             yield return new WaitForSeconds(UnityEngine.Random.Range(.1f, .3f));
-            base.ScareInRadius(this.transform.position, 20.0f);
+
+
+            foreach (IFearable fearable in SwitchFearableContainer())
+            {
+                fearable.Scare();
+            }
+
             _light.intensity = maxIntensity;
             yield return new WaitForSeconds(UnityEngine.Random.Range(.01f, .1f));
         }
@@ -33,7 +48,17 @@ public class SwitchLight : FearInducer, IClickable
 
     private void OnMouseOver()
     {
-        PlayerInteractionManager.ShowPotentiallyScaredInRadius(this.transform.position, 20.0f);
+        if (PlayerInteractionManager._instance.CannotSwitchLight())
+        {
+            return;
+        }
+
+        Debug.Log("Mouse captured");
+
+        foreach (IFearable fearable in SwitchFearableContainer())
+        {
+            fearable.ShowPotentiallyScarable();
+        }
     }
 
     private void OnMouseDown()

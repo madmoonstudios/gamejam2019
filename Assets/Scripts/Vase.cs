@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class Vase : FearInducer, IClickable
 {
+    [SerializeField]
+    private Sprite sprite;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     void IClickable.Interact()
     {
-        Destroy(this.gameObject);
+        spriteRenderer.sprite = sprite;
     }
 
     private void OnMouseDown()
@@ -16,6 +22,11 @@ public class Vase : FearInducer, IClickable
 
     private void OnMouseOver()
     {
+        if (PlayerInteractionManager._instance.CannotBreakVase())
+        {
+            return;
+        }
+
         PlayerInteractionManager.ShowPotentiallyScaredInRadius(this.transform.position, 20.0f);
 
     }
