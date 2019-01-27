@@ -35,22 +35,6 @@ public class NPCMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Set the agent's move destination to a static position.
-    /// </summary>
-    /// <param name="position">static position for the agent to move to.</param>
-    public void SetMoveTarget(Vector3 position)
-    {
-        // TODO(samkern): Destroy transform if it is no longer being moved to.
-        Transform t = new GameObject().transform;
-        t.position = position;
-        _moveTarget = t;
-
-        _agent.isStopped = false;
-        _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
-        StopCoroutine(UpdateDestination());
-    }
-
-    /// <summary>
     /// Set the agent's move destination to a dynamic position and start updates to check if the target moved.
     /// </summary>
     /// <param name="position">dynamic position for the agent to move to.</param>
@@ -64,11 +48,10 @@ public class NPCMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Stop the agent's movement, but do not clear its target.
+    /// Pause the agent's movement, but do not clear its target.
     /// </summary>
-    public void StopMoving()
+    public void PauseMoving()
     {
-        Debug.Log("Stop Moving");
         _agent.isStopped = true;
     }
 
@@ -81,13 +64,15 @@ public class NPCMovement : MonoBehaviour
     }
     
     private float _destinationUpdateInterval = .2f;
+    private bool updateDestinationRunning = false;
     
     /// <summary>
     /// Coroutine that periodically updates the agent's destination based on its current target.
     /// </summary>
     private IEnumerator UpdateDestination()
     {
-        while (true)
+        updateDestinationRunning = true;
+        while (_moveTarget != null)
         {
             _agent.destination = new Vector3(_moveTarget.position.x, _navAgentHeight, _moveTarget.position.z);
             yield return new WaitForSeconds(_destinationUpdateInterval);
@@ -103,8 +88,7 @@ public class NPCMovement : MonoBehaviour
 
     public void Update()
     {
-        if (_agent.isStopped || _agent.pathPending) return;
-        
+        if (_moveTarget == null || _agent.isStopped || _agent.pathPending) return;
         // Check if we've reached the destination
         if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
@@ -118,11 +102,17 @@ public class NPCMovement : MonoBehaviour
     private void HasReachedTarget()
     {
         _agent.isStopped = true;
+        _moveTarget = null;
         _movementCallback.TargetReached();
     }
 
     public void SetNPCMovementCallback(INPCMovementCallback moveCallback)
     {
         _movementCallback = moveCallback;
+    }
+
+    public void SetAgentVelocity(Vector3 velocity)
+    {
+        _agent.velocity = velocity;
     }
 }
