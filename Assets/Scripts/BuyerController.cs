@@ -210,4 +210,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             Destroy(this.gameObject);
         }
     }
+
+    public void ShowPotentiallyScarable()
+    {
+        _animator.CanBeFeard();
+    }
 }
