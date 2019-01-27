@@ -16,6 +16,11 @@ public class Vase : FearInducer, IClickable
 
     private void OnMouseOver()
     {
+        if (PlayerInteractionManager._instance.CannotBreakVase())
+        {
+            return;
+        }
+
         PlayerInteractionManager.ShowPotentiallyScaredInRadius(this.transform.position, 20.0f);
 
     }
