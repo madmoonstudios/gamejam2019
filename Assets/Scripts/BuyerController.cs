@@ -75,8 +75,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToRealtor()
     {
+        Debug.Log(gameObject.name + " Attempt purchase house");
         StopCoroutine(PauseBeforeNextMove());
-        _npcMovement.SetSpeed(1.8f);
+        _npcMovement.SetSpeed(1.4f);
         PurchaseHouseIndicator();
         _moveTargetType = MoveTargetType.REALTOR;
         _spriteAnimator.StartAnimating();
@@ -154,14 +155,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             MoveToRealtor();     // Go buy the house!
         }
-        else if (_moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
+        else if (IsScared() && _moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
         {
-            _moodIndicator.ShrinkIndicator();
+            Debug.Log(gameObject.name + " too scared to purchase: " + _fearLevelCurrent);
+            _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.PURCHASE_HOUSE);
             MoveToNextRoom();
         }
         
         if(IsScaredMild()) _moodIndicator.ScaredIndicator();
-        else _moodIndicator.HideScaredIndicator();
+        else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
     }
 
     internal bool TryEndGame()
