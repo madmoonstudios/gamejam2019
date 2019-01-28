@@ -62,7 +62,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         MoveToNextRoom();
         
         // TODO(dandov): Consider enabling this back later on.
-        // StartCoroutine(DecrementFear());
+        StartCoroutine(DecrementFear());
     }
 
     private void MoveToNextRoom()
