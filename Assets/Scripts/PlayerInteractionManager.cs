@@ -30,7 +30,7 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField]
     private Image _lightIconRenderer;
 
-    private const float c_pentagramMaxTime = 5.0f;
+    private const float c_pentagramMaxTime = 3.0f;
 
     private const float c_vaseMaxTime = 10.0f;
 
@@ -42,7 +42,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private float _lightRemainingTime = 0.0f;
 
-    private const float c_lightMaxTime = 10.0f;
+    private const float c_lightMaxTime = 8.0f;
 
     private float _currentFear;
 
@@ -80,7 +80,7 @@ public class PlayerInteractionManager : MonoBehaviour
         if (!_potentialEffectShowned)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
-            ShowPotentiallyScaredInRadius(new Vector3(worldPos.x, 3.66f, worldPos.z) , Pentagram.c_fearRadius);
+            ShowPotentiallyScaredInRadius(new Vector3(worldPos.x, 2.0f, worldPos.z) , Pentagram.c_fearRadius);
         }
     }
 
@@ -93,7 +93,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
 
-        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 3.66f, worldPos.z);
+        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 2f, worldPos.z);
 
         /*RaycastHit[] hits = Physics.SphereCastAll(adjustedWorldPos, 1.0f, Vector3.one);
 
@@ -187,7 +187,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
 
-        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 3.66f, worldPos.z);
+        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 2f, worldPos.z);
 
         Instantiate(_pentagram, adjustedWorldPos, Quaternion.identity);
         _pentagramRemainingTime = c_pentagramMaxTime;
