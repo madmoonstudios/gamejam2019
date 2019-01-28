@@ -143,6 +143,8 @@ public class PlayerInteractionManager : MonoBehaviour
         {
             return false;
         }
+        
+        _clickProcessed = true;
 
         if (_vaseRemainingTime > 0)
         {
@@ -151,7 +153,6 @@ public class PlayerInteractionManager : MonoBehaviour
 
         _vaseRemainingTime = c_vaseMaxTime;
         vase.Interact();
-        _clickProcessed = true;
         return true;
     }
 
@@ -161,6 +162,8 @@ public class PlayerInteractionManager : MonoBehaviour
         {
             return false;
         }
+        
+        _clickProcessed = true;
 
         if (_lightRemainingTime > 0)
         {
@@ -169,7 +172,6 @@ public class PlayerInteractionManager : MonoBehaviour
 
         _lightRemainingTime = c_lightMaxTime;
         light.Interact();
-        _clickProcessed = true;
         return true;
     }
 
@@ -185,9 +187,9 @@ public class PlayerInteractionManager : MonoBehaviour
             return false;
         }
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 2f, worldPos.z);
+        Vector3 adjustedWorldPos = new Vector3(worldPos.x, 2f, worldPos.z); // HACK: 2f is floor height
 
         Instantiate(_pentagram, adjustedWorldPos, Quaternion.identity);
         _pentagramRemainingTime = c_pentagramMaxTime;

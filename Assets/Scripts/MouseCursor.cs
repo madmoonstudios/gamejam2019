@@ -27,19 +27,27 @@ public class MouseCursor : MonoBehaviour
     void Update()
     {
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //todo: make 3.66 actual floor height
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         this.transform.position = new Vector3(worldPos.x, 3.66f, worldPos.z);
 
-        if (_vaseHighlighted && !PlayerInteractionManager._instance.CannotBreakVase())
+        if (_vaseHighlighted)
         {
-            _renderer.sprite = _vase;
+            if(!PlayerInteractionManager._instance.CannotBreakVase())
+                _renderer.sprite = _vase;
+            else
+                _renderer.sprite = null;
+            
             return;
         }
 
-        if (_lightHighlighted && !PlayerInteractionManager._instance.CannotSwitchLight())
+        if (_lightHighlighted)
         {
-            _renderer.sprite = _light;
+            if(!PlayerInteractionManager._instance.CannotSwitchLight())
+                _renderer.sprite = _light;
+            else
+                _renderer.sprite = null;
+            
             return;
         }
 
