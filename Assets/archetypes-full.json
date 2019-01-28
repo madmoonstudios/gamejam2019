@@ -4,9 +4,9 @@
       "name": "techbro",
       "moveSpeed": 50,
       "runSpeed": 100,
-      "fearVulnerability": 0.5,
+      "fearVulnerability": 2,
       "fearResistance": 0.5,
-      "buyingIntent": 50,
+      "buyingIntent": 95,
       "fearStamina": 100,
       "interestPoints": [
         {
@@ -41,10 +41,10 @@
       "name": "oldlady",
       "moveSpeed": 30,
       "runSpeed": 70,
-      "fearVulnerability": 0.2,
+      "fearVulnerability": 2,
       "fearResistance": 0.2,
-      "buyingIntent": 60,
-      "fearStamina": 80,
+      "buyingIntent": 75,
+      "fearStamina": 100,
       "interestPoints": [
         {
           "id": "kitchen"
@@ -78,9 +78,9 @@
       "name": "clown",
       "moveSpeed": 100,
       "runSpeed": 100,
-      "fearVulnerability": 0.6,
+      "fearVulnerability": 2,
       "fearResistance": 0.6,
-      "buyingIntent": 20,
+      "buyingIntent": 90,
       "fearStamina": 100,
       "interestPoints": [
         {
@@ -121,9 +121,9 @@
       "name": "businessman",
       "moveSpeed": 80,
       "runSpeed": 100,
-      "fearVulnerability": 0.1,
+      "fearVulnerability": 2,
       "fearResistance": 0.1,
-      "buyingIntent": 10,
+      "buyingIntent": 80,
       "fearStamina": 100,
       "interestPoints": [
         {
