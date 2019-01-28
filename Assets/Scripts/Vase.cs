@@ -20,20 +20,26 @@ public class Vase : FearInducer, IClickable
 
     void IClickable.Interact()
     {
-        spriteRenderer.sprite = sprite;
-    }
-
-    private void OnMouseDown()
-    {
         if (used)
+        {
             return;
-        
-        PlayerInteractionManager._instance.TryBreakVase(this);
+        }
+        spriteRenderer.sprite = sprite;
+
         base.ScareInRadius(this.transform.position, c_scareRadius);
         spriteRenderer.sprite = sprite;
         used = true;
 
+        this.gameObject.GetComponent<AudioSource>().Play();
+
         StartCoroutine(ResetVase());
+    }
+
+    private void OnMouseDown()
+    {
+        
+        PlayerInteractionManager._instance.TryBreakVase(this);
+
     }
 
     private IEnumerator ResetVase()
