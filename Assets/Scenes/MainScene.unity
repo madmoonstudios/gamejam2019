@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667594, g: 0.48427206, b: 0.5645243, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2316,6 +2316,7 @@ GameObject:
   - component: {fileID: 395864785}
   - component: {fileID: 395864784}
   - component: {fileID: 395864787}
+  - component: {fileID: 395864788}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2366,7 +2367,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -2399,7 +2400,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c9d875ed6041a485da308ea672e75dc7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.36
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2483,6 +2484,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &395864788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395864783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2399528078dd4630aa58c586c065271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsWaitPerIcremnet: 1
+  volumeIncrement: 0.01
+  volumeLimit: 0.7
 --- !u!1 &405818365
 GameObject:
   m_ObjectHideFlags: 0
@@ -11765,10 +11781,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2063441360, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -419
-      objectReference: {fileID: 0}
     - target: {fileID: 2063441361, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
@@ -11798,6 +11810,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 2063441360, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -419
+      objectReference: {fileID: 0}
     - target: {fileID: 324964042752392722, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -11842,6 +11858,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950444653, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8646407006722343874, guid: 76a457903d139074dbb49c3859f029f1,
         type: 3}
@@ -11857,10 +11877,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950444653, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 1950444654, guid: 76a457903d139074dbb49c3859f029f1, type: 3}
       propertyPath: m_Sprite
@@ -12030,15 +12046,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6865760859208308324, guid: 422d66bd27c5b4bce8c498ee031a7094,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6865760859208308321, guid: 422d66bd27c5b4bce8c498ee031a7094,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865760859208308324, guid: 422d66bd27c5b4bce8c498ee031a7094,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422d66bd27c5b4bce8c498ee031a7094, type: 3}
@@ -12159,11 +12175,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2400792374335653713, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
     - target: {fileID: 3311322401374448510, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
         type: 3}
       propertyPath: m_Mesh
@@ -12245,6 +12256,11 @@ PrefabInstance:
       propertyPath: m_characterSpacing
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2400792374335653713, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdcbece8d8a48934d8ced97dcd4f6a94, type: 3}
 --- !u!1001 &8971290482919089920
