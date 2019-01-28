@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.496413, b: 0.5748175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,26 +213,39 @@ MonoBehaviour:
   _textObject: {fileID: 2905323427494227359, guid: cbb89b17098ed4541b958442e0c17a06,
     type: 3}
   text:
+  - Click to advance
   - Hey, so here's the deal.
   - You
   - are
   - a
   - ghost.
-  - Not just any ghost!
-  - We're talking a
+  - and not just any ghost.
+  - 'You are a '
   - spooky
-  - spooky
-  - spooky
+  - Spooky
+  - SPOOKY
   - ghost.
-  - Now some lame bros
-  - they want to buy house.
+  - Some jerk realtor
+  - is trying to sell a house.
   - Not just any house...
-  - You're house.
-  - You done better scare them.
-  - Click the lights.
-  - Click the vases.
-  - Click the floor.
-  - Have fun!
+  - YOUR HOUSE.
+  - And as a ghost
+  - your only legal recourse
+  - is to
+  - Scare
+  - The Buyers
+  - Away
+  - Click the mouse to
+  - flicker the lights
+  - shatter vases
+  - and draw on the floor
+  - Good luck!
+  - ( ... You spooky ghost, you)
+  - ; )
+  - ; )
+  - ; )
+  - ; )
+  - ; )
 --- !u!4 &342689266
 Transform:
   m_ObjectHideFlags: 0

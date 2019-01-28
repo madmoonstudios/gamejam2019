@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Spooky font SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -663706573
   material: {fileID: 21559092256487402}
-  materialHashCode: 0
+  materialHashCode: 1761106264
   fontAssetType: 1
   m_fontInfo:
     Name: Spooky
     PointSize: 86
-    Scale: 0
+    Scale: 1
     CharacterCount: 92
     LineHeight: 86
     Baseline: 0
     Ascender: 64.5
-    CapHeight: 0
+    CapHeight: 64.15625
     Descender: -21.5
     CenterLine: 0
     SuperscriptOffset: 64.5
@@ -34,7 +34,7 @@ MonoBehaviour:
     UnderlineThickness: 4.3
     strikethrough: 15.636364
     strikethroughThickness: 4.3
-    TabWidth: 0
+    TabWidth: 430
     Padding: 9
     AtlasWidth: 1024
     AtlasHeight: 1024
@@ -43,10 +43,10 @@ MonoBehaviour:
   - id: 32
     x: 10
     y: 1033
-    width: 0
-    height: 0
+    width: 43
+    height: 86
     xOffset: 0
-    yOffset: 0
+    yOffset: 64.5
     xAdvance: 43
     scale: 1
   - id: 33
@@ -979,7 +979,7 @@ Material:
     - _BumpOutline: 0
     - _ColorMask: 15
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: 0.255
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -990,15 +990,15 @@ Material:
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
+    - _OutlineSoftness: 0.283
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.131
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.50175
+    - _ScaleRatioC: 0.50175
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -1024,7 +1024,7 @@ Material:
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.9433962, g: 0.92547375, b: 0.743147, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
