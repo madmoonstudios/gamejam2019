@@ -27,7 +27,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     [SerializeField] private List<int> _roomsLeftToVisit;
     [SerializeField] private int _nextRoomIndex = 0;
 
-    private SpriteAnimator _spriteAnimator;
+    public SpriteAnimator _spriteAnimator;
     private MoodIndicator _moodIndicator;
     
     private NPCMovement _npcMovement;
@@ -61,7 +61,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
         MoveToNextRoom();
         
-        // TODO(dandov): Consider enabling this back later on.
         StartCoroutine(DecrementFear());
     }
 

@@ -86,19 +86,38 @@ public class BuyerSpawner : MonoBehaviour
                 buyerController._fearIncrementRatio = arch.fearVulnerability;
                 buyerController._fearDecrementRatio = arch.fearResistance;
                 // Populate the interest points of the buyer.
-                foreach (var poi in arch.interestPoints)
-                {
-                    // TODO(dandov): Need to find how to map the rooms. An id per room.
-                    RoomType roomType = RoomType.BATHROOMS;
-                    // TODO(dandov): Make this deterministic.
-                    InterestPoint interestPoint =
-                        Room.roomsMap[roomType].GetRandomInterestPoint();
-                    buyerController._interestPoints.Add(interestPoint);
-                }
-                
+                //foreach (var poi in arch.interestPoints)
+                //{
+                //    // TODO(dandov): Need to find how to map the rooms. An id per room.
+                //    RoomType roomType = RoomType.BATHROOMS;
+                //    // TODO(dandov): Make this deterministic.
+                //    InterestPoint interestPoint =
+                //        Room.roomsMap[roomType].GetRandomInterestPoint();
+                //    buyerController._interestPoints.Add(interestPoint);
+                //}
+
+                SpriteAnimator animator = buyerController._spriteAnimator;
+                animator._sprites = animator._spriteSets[GetArchetypeSpriteIndex(buyer.name)];
             }
 
             yield return new WaitForSeconds(_waveWaitTime);
+        }
+    }
+
+    private int GetArchetypeSpriteIndex(string archetype)
+    {
+        switch (archetype)
+        {
+            case "techbro":
+                return 0;
+            case "oldlady":
+                return 1;
+            case "businessman":
+                return 3;
+            case "clown":
+                return 4;
+            default:
+                return 2;
         }
     }
 

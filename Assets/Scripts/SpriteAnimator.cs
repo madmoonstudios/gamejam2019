@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class SpriteAnimator : MonoBehaviour
 {
+    public Sprite [] _sprites;
+
     [SerializeField]
-    private Sprite [] _sprites;
+    public Sprite[] _spriteSet0, _spriteSet1, _spriteSet2, _spriteSet3, _spriteSet4;
+    public Sprite[][] _spriteSets;
 
     [SerializeField]
     private SpriteRenderer _renderer;
@@ -17,9 +20,18 @@ public class SpriteAnimator : MonoBehaviour
     private bool _flickering;
     private bool isFlickering;
     private float _timeSinceCanBeFeared;
-
     // Start is called before the first frame updat
     private bool _animatingMovement = false;
+
+    public void Awake()
+    {
+        _spriteSets = new Sprite[5][];
+        _spriteSets[0] = _spriteSet0;
+        _spriteSets[1] = _spriteSet1;
+        _spriteSets[2] = _spriteSet2;
+        _spriteSets[3] = _spriteSet3;
+        _spriteSets[4] = _spriteSet4;
+    }
 
     void Start()
     {
