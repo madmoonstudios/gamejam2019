@@ -146,6 +146,8 @@ MonoBehaviour:
   _interestPoints: []
   _roomsLeftToVisit: 
   _nextRoomIndex: 0
+  buyHouseClip: {fileID: 8300000, guid: 2f64c24b0c4dc49afa5bc6e41a7ca10f, type: 3}
+  scaredClip: {fileID: 8300000, guid: df017513eeaee478ba1960c5dfdf4ac3, type: 3}
   _animator: {fileID: 1910511956744437569}
 --- !u!114 &2583122799501671200
 MonoBehaviour:

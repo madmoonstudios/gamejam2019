@@ -21,7 +21,7 @@ public class IncrementVolume : MonoBehaviour
         {
             yield return new WaitForSeconds(this.secondsWaitPerIcremnet);
 
-            Debug.Log(audioComponent.volume);
+           
             if (audioComponent.volume < volumeLimit)
             {
                 audioComponent.volume += volumeIncrement;
