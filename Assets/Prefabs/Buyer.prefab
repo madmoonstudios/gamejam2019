@@ -147,7 +147,7 @@ MonoBehaviour:
   _roomsLeftToVisit: 
   _nextRoomIndex: 0
   _spriteAnimator: {fileID: 0}
-  buyHouseClip: {fileID: 8300000, guid: 2f64c24b0c4dc49afa5bc6e41a7ca10f, type: 3}
+  buyHouseClip: {fileID: 8300000, guid: 75eb2d3f5af0b4a529d85840e6c8b07d, type: 3}
   scaredClip: {fileID: 8300000, guid: df017513eeaee478ba1960c5dfdf4ac3, type: 3}
   _animator: {fileID: 1910511956744437569}
 --- !u!114 &2583122799501671200
