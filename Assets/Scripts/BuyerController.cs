@@ -33,8 +33,11 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
 
-    private float leisurely = 0.0f;    
-        
+    private float leisurely = 0.0f;
+
+    [SerializeField] private AudioClip buyHouseClip;
+    [SerializeField] private AudioClip scaredClip;
+
     // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
     // At this point the configuration should have been set and it is ok to use these values.
     private void ConfigureStats()
