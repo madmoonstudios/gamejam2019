@@ -146,6 +146,7 @@ MonoBehaviour:
   _interestPoints: []
   _roomsLeftToVisit: 
   _nextRoomIndex: 0
+  _spriteAnimator: {fileID: 0}
   buyHouseClip: {fileID: 8300000, guid: 75eb2d3f5af0b4a529d85840e6c8b07d, type: 3}
   scaredClip: {fileID: 8300000, guid: df017513eeaee478ba1960c5dfdf4ac3, type: 3}
   _animator: {fileID: 1910511956744437569}
@@ -424,6 +425,36 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
   - {fileID: 21300006, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
   - {fileID: 21300008, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  _spriteSet0:
+  - {fileID: 21300000, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300002, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300004, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300006, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300008, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  _spriteSet1:
+  - {fileID: 21300010, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300012, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300014, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300016, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300018, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  _spriteSet2:
+  - {fileID: 21300020, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300022, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300024, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300026, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300028, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  _spriteSet3:
+  - {fileID: 21300030, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300032, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300034, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300036, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300038, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  _spriteSet4:
+  - {fileID: 21300040, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300042, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300044, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300046, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
+  - {fileID: 21300048, guid: 5d2a054fd128c17498387d2a31cd69ae, type: 3}
   _renderer: {fileID: 2583122800074681601}
   _timeBetweenFrames: 0.1
 --- !u!1 &6102783267046672625
