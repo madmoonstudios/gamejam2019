@@ -5,6 +5,13 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 
+enum Powers
+{
+    PENTAGRAM,
+    VASE,
+    LIGHT
+}
+
 public class PlayerInteractionManager : MonoBehaviour
 {
     public static PlayerInteractionManager _instance;
@@ -48,14 +55,40 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private bool _potentialEffectShowned = false;
 
+
+    // private AudioClip vaseClip;
+
+
     void Awake()
     {
         _instance = this;
     }
 
+    private void playSound()
+    {
+        var audioSource = this.gameObject.GetComponent<AudioSource>();
+        if (audioSource)
+        {
+            audioSource.Play();
+        }
+        //switch (targetPower)
+        //{
+        //    case (Powers.LIGHT):
+        //        {
+
+        //        }
+        //}
+    }
+
     private void Update()
     {
         float prp = (Mathf.Max(0, _pentagramRemainingTime));
+
+        float eps = 0.000001f;
+        if (_pentagramRemainingTime <= eps)
+        {
+            // playSound();
+        }
 
         _pentagramRechargeProgress.text = prp == 0 ? "" : prp.ToString("0.0");
         _pentagramIconRenderer.color = prp == 0 ? Color.white : Color.grey;

@@ -33,8 +33,11 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
 
-    private float leisurely = 0.0f;    
-        
+    private float leisurely = 0.0f;
+
+    [SerializeField] private AudioClip buyHouseClip;
+    [SerializeField] private AudioClip scaredClip;
+
     // TODO(samkern): Replace this with some sort of archetype generator, if we end up having one.
     // At this point the configuration should have been set and it is ok to use these values.
     private void ConfigureStats()
@@ -59,11 +62,18 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         MoveToNextRoom();
         
         // TODO(dandov): Consider enabling this back later on.
-        // StartCoroutine(DecrementFear());
+        StartCoroutine(DecrementFear());
     }
 
     private void MoveToNextRoom()
     {
+        //if (_nextRoomIndex < _interestPoints.Count)
+        //{
+        //    _moveTargetType = MoveTargetType.ROOM;
+        //    _npcMovement.SetMoveTarget(_interestPoints[_nextRoomIndex].transform);
+        //    _nextRoomIndex++;
+        //}
+
         _npcMovement.SetSpeedMod(1.0f);
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
@@ -76,10 +86,14 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             //_nextRoomIndex is only used for unvisited rooms
             _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
-            int _nextRoomToVisit = _roomsLeftToVisit[_nextRoomIndex];
             _spriteAnimator.StartAnimating();
-            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomToVisit].GetRandomInterestPoint().transform);
+            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
+            if(_roomsLeftToVisit.Count == 1)
+            {
+                Debug.Log("Last room index is : " + Room.allRooms[_nextRoomIndex]);
+            }
         }
+
     }
 
     private void MoveToRealtor()
@@ -90,6 +104,13 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _moveTargetType = MoveTargetType.REALTOR;
         _spriteAnimator.StartAnimating();
         _npcMovement.SetMoveTarget(RealtorController.realtorTransform);
+
+        var audioSource = this.gameObject.GetComponent<AudioSource>();
+        if (audioSource)
+        {
+            audioSource.clip = this.buyHouseClip;
+            audioSource.Play();
+        }
     }
 
     private void PurchaseHouseIndicator()
@@ -111,7 +132,11 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare(float scareAmount)
     {
-        this.gameObject.GetComponent<AudioSource>().Play();
+        var audioSource = this.gameObject.GetComponent<AudioSource>();
+        if (audioSource) {
+            audioSource.clip = this.scaredClip;
+            audioSource.Play();
+        }
         _moodIndicator.GhostIndicator();
         _fearLevelCurrent += _fearIncrementRatio * scareAmount;
         DoFearChecks();
