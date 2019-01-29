@@ -86,12 +86,9 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             //_nextRoomIndex is only used for unvisited rooms
             _nextRoomIndex = UnityEngine.Random.Range(0, _roomsLeftToVisit.Count);
+            int roomToMoveIndex = _roomsLeftToVisit[_nextRoomIndex];
             _spriteAnimator.StartAnimating();
-            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
-            if(_roomsLeftToVisit.Count == 1)
-            {
-                Debug.Log("Last room index is : " + Room.allRooms[_nextRoomIndex]);
-            }
+            _npcMovement.SetMoveTarget(Room.allRooms[roomToMoveIndex].GetRandomInterestPoint().transform);
         }
 
     }
