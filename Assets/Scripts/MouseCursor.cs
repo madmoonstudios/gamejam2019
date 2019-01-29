@@ -31,24 +31,27 @@ public class MouseCursor : MonoBehaviour
 
         this.transform.position = new Vector3(worldPos.x, 3.66f, worldPos.z);
 
+        
         if (_vaseHighlighted)
         {
-            if(!PlayerInteractionManager._instance.CannotBreakVase())
+            if (!PlayerInteractionManager._instance.CannotBreakVase())
+            {
                 _renderer.sprite = _vase;
+                return;
+            }
             else
                 _renderer.sprite = null;
-            
-            return;
         }
 
         if (_lightHighlighted)
         {
-            if(!PlayerInteractionManager._instance.CannotSwitchLight())
+            if (!PlayerInteractionManager._instance.CannotSwitchLight())
+            {
                 _renderer.sprite = _light;
+                return;
+            }
             else
                 _renderer.sprite = null;
-            
-            return;
         }
 
         if (!PlayerInteractionManager._instance.CannotPentagram())

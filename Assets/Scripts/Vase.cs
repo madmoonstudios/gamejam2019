@@ -47,15 +47,11 @@ public class Vase : FearInducer, IClickable
 
     private void OnMouseEnter()
     {
-        if (used)
-            return;
         MouseCursor._instance._vaseHighlighted = true;
     }
 
     private void OnMouseExit()
     {
-        if (used)
-            return;
         MouseCursor._instance._vaseHighlighted = false;
     }
 
