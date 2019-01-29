@@ -57,8 +57,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     public void Start()
     {
-        // Intialize array of rooms visited to false.
+        // Intialize list of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
+        
+        // Remove a random room to make it play faster
+        _roomsLeftToVisit.Remove(UnityEngine.Random.Range(0, Room.allRooms.Count)); 
+        
         MoveToNextRoom();
         
         StartCoroutine(DecrementFear());
@@ -66,20 +70,13 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     private void MoveToNextRoom()
     {
-        //if (_nextRoomIndex < _interestPoints.Count)
-        //{
-        //    _moveTargetType = MoveTargetType.ROOM;
-        //    _npcMovement.SetMoveTarget(_interestPoints[_nextRoomIndex].transform);
-        //    _nextRoomIndex++;
-        //}
-
         _npcMovement.SetSpeedMod(1.0f);
         _moveTargetType = MoveTargetType.ROOM;
         if (_roomsLeftToVisit.Count == 0)
         {
-            int nextRoomIndex = UnityEngine.Random.Range(0, Room.allRooms.Count);
+            int roomToMoveIndex = UnityEngine.Random.Range(0, Room.allRooms.Count);
             _spriteAnimator.StartAnimating();
-            _npcMovement.SetMoveTarget(Room.allRooms[_nextRoomIndex].GetRandomInterestPoint().transform);
+            _npcMovement.SetMoveTarget(Room.allRooms[roomToMoveIndex].GetRandomInterestPoint().transform);
         }
         else
         {

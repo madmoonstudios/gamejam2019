@@ -27,7 +27,7 @@ public class NPCMovement : MonoBehaviour
     private void ConfigureStats()
     {
         _agent.stoppingDistance = 2.0f;
-        _moveSpeedNormal = UnityEngine.Random.Range(2.0f, 6.0f);
+        _moveSpeedNormal = UnityEngine.Random.Range(4.0f, 7.0f);
         _agent.speed = _moveSpeedNormal;
     }
 
