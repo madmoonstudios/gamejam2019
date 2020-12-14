@@ -66,6 +66,15 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         MoveToNextRoom();
         
         StartCoroutine(DecrementFear());
+        StartCoroutine(MakeScareable());
+    }
+
+    private IEnumerator MakeScareable()
+    {
+        _animator.InvulnerableIndicator();
+        yield return new WaitForSeconds(4.0f);
+        _scareable = true;
+        _animator.VulnerableIndicator();
     }
 
     private void MoveToNextRoom()
@@ -125,6 +134,11 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     // IFearable
     public void Scare(float scareAmount)
     {
+        if (!_scareable)
+        {
+            return;
+        }
+
         var audioSource = this.gameObject.GetComponent<AudioSource>();
         if (audioSource) {
             audioSource.clip = this.scaredClip;
@@ -155,6 +169,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField]
     private SpriteAnimator _animator;
+    private bool _scareable = false;
 
     /// <summary>
     /// Coroutine that periodically decrements the fear level of the NPC.

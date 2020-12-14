@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3369499cf2c34c30b670c1f435ab840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buyerRenderer: {fileID: 2583122800074681601}
   ghost: {fileID: 21300000, guid: 65891746abfcf43d8ae740409694c1a9, type: 3}
   happy: {fileID: 21300000, guid: e190ce04b716f4655a4f1ad4840a1fef, type: 3}
   scared: {fileID: 21300000, guid: 8974d35a29adc4d31ae32e7adc81fe75, type: 3}

@@ -22,6 +22,7 @@ public class SpriteAnimator : MonoBehaviour
     private float _timeSinceCanBeFeared;
     // Start is called before the first frame updat
     private bool _animatingMovement = false;
+    private bool _isInvulnerable;
 
     public void Awake()
     {
@@ -57,9 +58,25 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
+    public void InvulnerableIndicator()
+    {
+        _isInvulnerable = true;
+    }
+
+    public void VulnerableIndicator()
+    {
+        _isInvulnerable = false;
+    }
+
     private void Update()
     {
         float newTimeSinceCanBeFeared = _timeSinceCanBeFeared - Time.deltaTime;
+
+        if (_isInvulnerable)
+        {
+            _renderer.color = Color.black;
+            return;
+        }
 
         if (isFlickering == true)
         {
@@ -76,7 +93,7 @@ public class SpriteAnimator : MonoBehaviour
         }
 
         _timeSinceCanBeFeared = newTimeSinceCanBeFeared;
-        _renderer.color = Color.white;
+        _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime * 10.0f);
     }
 
     private IEnumerator Animate()
