@@ -21,13 +21,20 @@ public class BuyerSpawner : MonoBehaviour
 
     [SerializeField]
     private float _raycastStartY = 80.0f;
+
+    [SerializeField]
+    TextAsset archetypesText;
+
+    [SerializeField]
+    TextAsset wavesText;
+
     // Start is called before the first frame update
     void Start()
     {
         _waitTime = UnityEngine.Random.Range(3.0f, 10.0f);
         _waveWaitTime = 10.0f;
 
-        var globalConfigData = this.LoadArchetypeData("/archetypes-full.json");
+        var globalConfigData = this.LoadArchetypeData(archetypesText);
 
         ArchetypesMap archetypes = new ArchetypesMap();
         foreach (var archetype in globalConfigData.archetypes)
@@ -36,7 +43,7 @@ public class BuyerSpawner : MonoBehaviour
         }
         Debug.Log(JsonUtility.ToJson(globalConfigData, true));
 
-        var waveConfigData = this.LoadWaveData("/waves.json");
+        var waveConfigData = this.LoadWaveData(wavesText);
         Debug.Log(JsonUtility.ToJson(waveConfigData, true));
 
         StartCoroutine(Spawn(archetypes, waveConfigData));
@@ -141,7 +148,7 @@ public class BuyerSpawner : MonoBehaviour
 
                 BuyerController buyerController = gameObject.GetComponent<BuyerController>();
 
-                KeyValuePair<string,ArchetypeData> arch = archetypesList[Random.Range(0, archetypesList.Count)];
+                KeyValuePair<string, ArchetypeData> arch = archetypesList[Random.Range(0, archetypesList.Count)];
                 // Populate buyer properties.
                 buyerController._moveSpeed = arch.Value.moveSpeed;
                 buyerController._runSpeed = arch.Value.moveSpeed;
@@ -185,39 +192,21 @@ public class BuyerSpawner : MonoBehaviour
         }
     }
 
-    private GlobalConfigData LoadArchetypeData(string jsonFilePath)
+    private GlobalConfigData LoadArchetypeData(TextAsset jsonFilePath)
     {
-        string filePath = Application.dataPath + jsonFilePath;
-
         GlobalConfigData globalConfigData;
-        if (File.Exists(filePath))
-        {
-            string dataAsJson = File.ReadAllText(filePath);
-            globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
-        }
-        else
-        {
-            globalConfigData = new GlobalConfigData();
-        }
+        string dataAsJson = jsonFilePath.text;
+        globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
+
         return globalConfigData;
 
 
     }
 
-    private WavesConfigData LoadWaveData(string jsonFilePath)
+    private WavesConfigData LoadWaveData(TextAsset jsonFilePath)
     {
-        string wavesConfigFilePath = Application.dataPath + jsonFilePath;
-        WavesConfigData wavesConfigData;
+        WavesConfigData wavesConfigData = JsonUtility.FromJson<WavesConfigData>(jsonFilePath.text);
 
-        if (File.Exists(wavesConfigFilePath))
-        {
-            string waveJsonData = File.ReadAllText(wavesConfigFilePath);
-            wavesConfigData = JsonUtility.FromJson<WavesConfigData>(waveJsonData);
-        }
-        else
-        {
-            wavesConfigData = new WavesConfigData();
-        }
         return wavesConfigData;
     }
 

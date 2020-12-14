@@ -12279,6 +12279,16 @@ PrefabInstance:
       propertyPath: buyerNumber
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3839833865476970932, guid: 9e59fa2704a262a4798be5fcb5f44b1f,
+        type: 3}
+      propertyPath: archetypesText
+      value: 
+      objectReference: {fileID: 4900000, guid: b499b09514d804353bcaf59d23eb0e33, type: 3}
+    - target: {fileID: 3839833865476970932, guid: 9e59fa2704a262a4798be5fcb5f44b1f,
+        type: 3}
+      propertyPath: wavesText
+      value: 
+      objectReference: {fileID: 4900000, guid: bd0736aba7dd94f8281f81f33d45b4ef, type: 3}
     - target: {fileID: 4640421065276642985, guid: 9e59fa2704a262a4798be5fcb5f44b1f,
         type: 3}
       propertyPath: m_IsActive
