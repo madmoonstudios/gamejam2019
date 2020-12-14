@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using ArchetypesMap =
     System.Collections.Generic.Dictionary<string, ArchetypeData>;
+using System.Linq;
 
 public class BuyerSpawner : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class BuyerSpawner : MonoBehaviour
 
     private IEnumerator Spawn(ArchetypesMap archetypes, WavesConfigData waveConfig)
     {
-        foreach(var wave in waveConfig.waves)
+        foreach (var wave in waveConfig.waves)
         {
             Debug.Log(wave.name);
             foreach (var buyer in wave.buyers)
@@ -102,6 +103,69 @@ public class BuyerSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(_waveWaitTime);
         }
+
+        int generatedWaveNumber = 0;
+        List<KeyValuePair<string, ArchetypeData>> archetypesList = archetypes.ToList();
+        while (true)
+        {
+            Debug.Log(generatedWaveNumber++);
+            for (int buyer = 0; buyer < Random.Range(20 + generatedWaveNumber, 25 + generatedWaveNumber); buyer++)
+            {
+                yield return new WaitForSeconds(Random.Range(0, 4));
+                int layerMask = 1 << 8;
+                // Everything but layer 8, floor should be in something OTHER than layer 8!
+                layerMask = ~layerMask;
+                RaycastHit hit;
+                Physics.Raycast(
+                    new Ray(
+                        new Vector3(
+                            this.transform.position.x,
+                             _raycastStartY,
+                             this.transform.position.z
+                        ),
+                        new Vector3(0.0f, -1.0f, 0.0f)),
+                        out hit,
+                        Mathf.Infinity,
+                        layerMask
+                );
+                GameObject gameObject = GameObject.Instantiate(
+                    _buyerPrefab,
+                     hit.point,
+                     Quaternion.identity,
+                     null
+                );
+
+                // Position the buyer.
+                NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+                agent.transform.position += new Vector3(0, agent.height / 2, 0);
+
+                BuyerController buyerController = gameObject.GetComponent<BuyerController>();
+
+                KeyValuePair<string,ArchetypeData> arch = archetypesList[Random.Range(0, archetypesList.Count)];
+                // Populate buyer properties.
+                buyerController._moveSpeed = arch.Value.moveSpeed;
+                buyerController._runSpeed = arch.Value.moveSpeed;
+                buyerController._fearLevelInitial = arch.Value.buyingIntent;
+                buyerController._fearLevelMax = arch.Value.fearStamina;
+                buyerController._fearIncrementRatio = arch.Value.fearVulnerability;
+                buyerController._fearDecrementRatio = arch.Value.fearResistance;
+                // Populate the interest points of the buyer.
+                //foreach (var poi in arch.interestPoints)
+                //{
+                //    // TODO(dandov): Need to find how to map the rooms. An id per room.
+                //    RoomType roomType = RoomType.BATHROOMS;
+                //    // TODO(dandov): Make this deterministic.
+                //    InterestPoint interestPoint =
+                //        Room.roomsMap[roomType].GetRandomInterestPoint();
+                //    buyerController._interestPoints.Add(interestPoint);
+                //}
+
+                SpriteAnimator animator = buyerController._spriteAnimator;
+                animator._sprites = animator._spriteSets[GetArchetypeSpriteIndex(arch.Key)];
+            }
+
+            yield return new WaitForSeconds(_waveWaitTime);
+        }
     }
 
     private int GetArchetypeSpriteIndex(string archetype)
@@ -129,7 +193,7 @@ public class BuyerSpawner : MonoBehaviour
         if (File.Exists(filePath))
         {
             string dataAsJson = File.ReadAllText(filePath);
-           globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
+            globalConfigData = JsonUtility.FromJson<GlobalConfigData>(dataAsJson);
         }
         else
         {
@@ -137,7 +201,7 @@ public class BuyerSpawner : MonoBehaviour
         }
         return globalConfigData;
 
-       
+
     }
 
     private WavesConfigData LoadWaveData(string jsonFilePath)

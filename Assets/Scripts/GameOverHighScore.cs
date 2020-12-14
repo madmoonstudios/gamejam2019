@@ -10,6 +10,7 @@ public class GameOverHighScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Room.allRooms.Clear();
         _gameOverText.text = string.Format(
             "High Score: {0}", 
             PlayerPrefs.GetInt("HighScore", 0));
