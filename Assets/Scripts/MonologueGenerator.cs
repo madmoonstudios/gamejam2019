@@ -50,8 +50,8 @@ public class MonologueGenerator : MonoBehaviour
             {
                 GameObject.Instantiate(
                     _spookyWord,
-                    this.transform.position + new Vector3(Random.Range(-.05f, .05f), 0, Random.Range(-.05f, .05f)),
-                    Quaternion.Euler(90, 0, 0),
+                    this.transform.position + new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f), 0.0f),
+                    Quaternion.Euler(Random.Range(80,100), 0, 0),
                     null).GetComponent<SpookyWord>().SetText(word);
                 yield return new WaitForSeconds(Random.Range(1.5f, 2.4f));
             }
