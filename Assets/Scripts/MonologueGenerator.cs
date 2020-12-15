@@ -42,7 +42,7 @@ public class MonologueGenerator : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
-            float spookLevel = Mathf.Max(0, _controller.GetSpookLevel() + Random.Range(-.2f, .2f));
+            float spookLevel = Mathf.Max(0, _controller.GetSpookLevel() - Random.Range(0,15));
 
             string phrase = _spookyPhrasesInput.FindLast((spookPhrase) => spookPhrase.spookLevel <= spookLevel).phrase;
 
@@ -53,7 +53,7 @@ public class MonologueGenerator : MonoBehaviour
                     this.transform.position + new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f), 0.0f),
                     Quaternion.Euler(Random.Range(80,100), 0, 0),
                     null).GetComponent<SpookyWord>().SetText(word);
-                yield return new WaitForSeconds(Random.Range(1.5f, 2.4f));
+                yield return new WaitForSeconds(Random.Range(0.5f, 2.4f));
             }
         }
     }

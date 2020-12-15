@@ -208,44 +208,44 @@ MonoBehaviour:
   _spookyPhrasesInput:
   - phrase: AGHH!
     spookLevel: 0
-  - phrase: Looks great!
-    spookLevel: 53
-  - phrase: I want to go home!
-    spookLevel: 5
-  - phrase: This was a bad idea.
+  - phrase: This was the worst idea ever!
     spookLevel: 10
-  - phrase: I don't feel so good.
-    spookLevel: 15
-  - phrase: What am I doing here?
+  - phrase: I want to go home!
     spookLevel: 20
-  - phrase: I don't know if I could live here.
+  - phrase: This was a bad idea.
     spookLevel: 25
-  - phrase: This place feels kind of creepy.
+  - phrase: I don't feel so good.
     spookLevel: 30
-  - phrase: I don't know if I would have guests over here.
+  - phrase: What am I doing here?
     spookLevel: 35
-  - phrase: This room is nice!
+  - phrase: I don't know if I could live here.
     spookLevel: 40
-  - phrase: I like the floors here!
+  - phrase: This place feels kind of creepy.
     spookLevel: 45
-  - phrase: What a nice vase!
-    spookLevel: 47
-  - phrase: The lighting is nice here.
+  - phrase: I don't know if I would have guests over here.
     spookLevel: 50
-  - phrase: I bet there's a lot to do around here.
-    spookLevel: 54
-  - phrase: I love the aesthetic.
+  - phrase: This room is nice!
     spookLevel: 55
+  - phrase: I like the floors here!
+    spookLevel: 59
+  - phrase: What a nice vase!
+    spookLevel: 65
+  - phrase: The lighting is nice here.
+    spookLevel: 70
+  - phrase: I bet there's a lot to do around here.
+    spookLevel: 75
+  - phrase: I love the aesthetic.
+    spookLevel: 80
   - phrase: High cielings, very nice!
-    spookLevel: 56
+    spookLevel: 85
   - phrase: I could really see myself here.
-    spookLevel: 57
+    spookLevel: 90
   - phrase: It all looks really cute!
-    spookLevel: 58
+    spookLevel: 95
   - phrase: This could be my next home
     spookLevel: 60
   - phrase: Gosh darn! I sure am not spooked.
-    spookLevel: 59
+    spookLevel: 100
   _controller: {fileID: 2583122799501671203}
   _spookyWord: {fileID: 2905323427494227359, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
     type: 3}

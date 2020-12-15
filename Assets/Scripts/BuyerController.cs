@@ -157,7 +157,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     internal float GetSpookLevel()
     {
-        return _fearLevelCurrent / _fearLevelMax;
+        return _fearLevelMax - _fearLevelCurrent;
     }
 
     private float _fearDecrementInterval = 5.0f;
