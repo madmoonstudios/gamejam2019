@@ -209,7 +209,7 @@ MonoBehaviour:
   - phrase: AGHH!
     spookLevel: 0
   - phrase: Looks great!
-    spookLevel: 60
+    spookLevel: 53
   - phrase: I want to go home!
     spookLevel: 5
   - phrase: This was a bad idea.
@@ -233,19 +233,19 @@ MonoBehaviour:
   - phrase: The lighting is nice here.
     spookLevel: 50
   - phrase: I bet there's a lot to do around here.
-    spookLevel: 60
+    spookLevel: 54
   - phrase: I love the aesthetic.
-    spookLevel: 60
+    spookLevel: 55
   - phrase: High cielings, very nice!
-    spookLevel: 60
+    spookLevel: 56
   - phrase: I could really see myself here.
-    spookLevel: 60
+    spookLevel: 57
   - phrase: It all looks really cute!
-    spookLevel: 60
+    spookLevel: 58
   - phrase: This could be my next home
     spookLevel: 60
   - phrase: Gosh darn! I sure am not spooked.
-    spookLevel: 60
+    spookLevel: 59
   _controller: {fileID: 2583122799501671203}
   _spookyWord: {fileID: 2905323427494227359, guid: cdcbece8d8a48934d8ced97dcd4f6a94,
     type: 3}
