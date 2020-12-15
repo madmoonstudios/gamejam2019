@@ -64,6 +64,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,6 +76,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -204,8 +206,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spookyPhrasesInput:
-  - phrase: Gosh darn! I sure am spooked.
+  - phrase: AGHH!
     spookLevel: 0
+  - phrase: Looks great!
+    spookLevel: 60
+  - phrase: I want to go home!
+    spookLevel: 5
+  - phrase: This was a bad idea.
+    spookLevel: 10
+  - phrase: I don't feel so good.
+    spookLevel: 15
+  - phrase: What am I doing here?
+    spookLevel: 20
+  - phrase: I don't know if I could live here.
+    spookLevel: 25
+  - phrase: This place feels kind of creepy.
+    spookLevel: 30
+  - phrase: I don't know if I would have guests over here.
+    spookLevel: 35
+  - phrase: This room is nice!
+    spookLevel: 40
+  - phrase: I like the floors here!
+    spookLevel: 45
+  - phrase: What a nice vase!
+    spookLevel: 47
+  - phrase: The lighting is nice here.
+    spookLevel: 50
+  - phrase: I bet there's a lot to do around here.
+    spookLevel: 60
+  - phrase: I love the aesthetic.
+    spookLevel: 60
+  - phrase: High cielings, very nice!
+    spookLevel: 60
+  - phrase: I could really see myself here.
+    spookLevel: 60
+  - phrase: It all looks really cute!
+    spookLevel: 60
+  - phrase: This could be my next home
+    spookLevel: 60
   - phrase: Gosh darn! I sure am not spooked.
     spookLevel: 60
   _controller: {fileID: 2583122799501671203}
@@ -354,6 +392,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -365,6 +404,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -505,6 +545,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -516,6 +557,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -576,7 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3369499cf2c34c30b670c1f435ab840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyerRenderer: {fileID: 2583122800074681601}
   ghost: {fileID: 21300000, guid: 65891746abfcf43d8ae740409694c1a9, type: 3}
   happy: {fileID: 21300000, guid: e190ce04b716f4655a4f1ad4840a1fef, type: 3}
   scared: {fileID: 21300000, guid: 8974d35a29adc4d31ae32e7adc81fe75, type: 3}
