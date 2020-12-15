@@ -13,7 +13,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     [SerializeField] private float _fearLevelCurrent = 0;
 
-    private float _mildScaredLevel = 20.0f;
     private float _scaredLevel = 50.0f;
     public float _fearLevelInitial = 0f;               // Standard fear for a new buyer.
     public float _fearLevelMax = 100f;                  // The fear level at which the buyer will flee the house.
@@ -29,7 +28,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
     public SpriteAnimator _spriteAnimator;
     private MoodIndicator _moodIndicator;
-    
+
     private NPCMovement _npcMovement;
     private MoveTargetType _moveTargetType; // Are they moving within the room, to a realtor, or fleeing the house?
 
@@ -59,12 +58,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         // Intialize list of rooms visited to false.
         _roomsLeftToVisit = Enumerable.Range(0, Room.allRooms.Count).ToList();
-        
+
         // Remove a random room to make it play faster
-        _roomsLeftToVisit.Remove(UnityEngine.Random.Range(0, Room.allRooms.Count)); 
-        
+        _roomsLeftToVisit.Remove(UnityEngine.Random.Range(0, Room.allRooms.Count));
+
         MoveToNextRoom();
-        
+
         StartCoroutine(DecrementFear());
         StartCoroutine(MakeScareable());
     }
@@ -140,7 +139,8 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         }
 
         var audioSource = this.gameObject.GetComponent<AudioSource>();
-        if (audioSource) {
+        if (audioSource)
+        {
             audioSource.clip = this.scaredClip;
             audioSource.Play();
         }
@@ -148,11 +148,6 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         _fearLevelCurrent += _fearIncrementRatio * scareAmount;
         DoFearChecks();
         _animator.DoFearFlicker();
-    }
-
-    internal bool IsScaredMild()
-    {
-        return _fearLevelCurrent > _mildScaredLevel;
     }
 
     internal bool IsScared()
@@ -188,7 +183,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     private void DoFearChecks()
     {
         if (_moveTargetType == MoveTargetType.FLEE) return; // We are already fleeing; do nothing else
-        
+
         if (_fearLevelCurrent >= _fearLevelMax)
         {
             FleeHouse();         // OMG leave, dis too scary
@@ -198,27 +193,10 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         {
             MoveToRealtor();     // Go buy the house!
         }
-        else if (IsScaredMild() && _moveTargetType == MoveTargetType.REALTOR) // Stop going to the realtor! We're too scared!
-        {
-            _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.PURCHASE_HOUSE);
 
-
-            // Add additional rooms to go visit
-            int mod = (int) Mathf.Floor(Room.allRooms.Count / 2.0f);
-            int lowAdjust = UnityEngine.Random.Range(0, mod);
-            int highAdjust = UnityEngine.Random.Range(0, mod) + lowAdjust;
-            _roomsLeftToVisit = Enumerable.Range(lowAdjust, (Room.allRooms.Count - highAdjust)).ToList();
-            MoveToNextRoom();
-        }
-        
-        if(IsScaredMild()) _moodIndicator.ScaredIndicator();
-        else
-        {
-            if (_moveTargetType == MoveTargetType.REALTOR) // TODO(samkern): Fix this hack, which basically ensures the purchase house indicator is shown
-                _moodIndicator.PurchaseHouseIndicator();
-            
-            else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
-        }
+        if (_moveTargetType == MoveTargetType.REALTOR) // TODO(samkern): Fix this hack, which basically ensures the purchase house indicator is shown
+            _moodIndicator.PurchaseHouseIndicator();
+        else _moodIndicator.ShrinkIndicatorByType(MoodIndicator.IndicatorType.SCARED);
     }
 
     internal bool TryEndGame()
@@ -231,12 +209,12 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
 
         return false;
     }
-    
+
     public void OnDestroy()
     {
         StopCoroutine(DecrementFear());
     }
-    
+
     // NPC MOVEMENT CALLBACK
 
     public void TargetReached()
@@ -270,7 +248,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
         yield return new WaitForSeconds(time);
 
         if (_moveTargetType != MoveTargetType.FLEE) // If we are already fleeing, do nothing
-        {      
+        {
             if (_roomsLeftToVisit.Count == 0 && !IsScared())
             {
                 MoveToRealtor(); // We have visited all rooms; try to purchase the house.
@@ -288,7 +266,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
     {
         _npcMovement.SetNPCMovementCallback(this);
     }
-    
+
     internal void TryDestroy()
     {
         if (_moveTargetType == MoveTargetType.FLEE)
