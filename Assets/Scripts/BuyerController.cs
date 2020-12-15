@@ -189,7 +189,7 @@ public class BuyerController : MonoBehaviour, IFearable, INPCMovementCallback
             FleeHouse();         // OMG leave, dis too scary
         }
         // If the buyer is not scared and they have visited all rooms.
-        else if (!IsScared() && _roomsLeftToVisit.Count == 0 && _moveTargetType != MoveTargetType.REALTOR)
+        else if (_roomsLeftToVisit.Count == 0 && _moveTargetType != MoveTargetType.REALTOR)
         {
             MoveToRealtor();     // Go buy the house!
         }
